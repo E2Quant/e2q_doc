@@ -1,0 +1,28 @@
+#--------
+# Name:hello
+#   Parameters:
+# -> return var 
+# Description: 
+#   return var 
+#--------	
+func hello() {
+    var = 5;
+    return var;
+}
+#----- func end
+
+#--------
+# Name:world
+#   Parameters:
+# - arg1: 
+# - arg2: 
+# -> return number   
+# Description: 
+#   arg1 + arg2 
+#--------	
+func world(arg1, arg2) {
+    value = arg1 + arg2;
+
+    return value; 
+}
+#----- func end

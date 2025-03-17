@@ -1,0 +1,82 @@
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+#func treturn(arg) {
+#
+#    var = arg + 10;
+#    return var;
+#}
+#----- func end
+
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func comp(arg) {
+#base
+    _var = 120;
+#   _cond1 = 0;
+    _cond = arg >  _var;
+#    if (arg > _var) {
+#        echo(arg);
+#    }
+#
+#    if(_cond1 != 0){
+#        echo(arg);
+#    }
+#
+    echo(_cond);
+    echo(_var);
+##
+##  mutateType 的问题
+##
+    if( _cond ){
+        echo(arg);
+        echo(_var);
+
+    }
+#   dd = 10;
+#   _cond1 = (arg == 9);
+#    if(_cond2 == 0){
+#        echo(arg);
+#    }
+    _cond = arg > 6;
+   _cond1 = ( _cond > 0 ) || (arg < _var); 
+    if( _cond1 ){
+        echo(arg);
+    }
+
+
+##
+## 这个代码会出错
+##
+    bull_val = 10;
+    if(arg > 0){
+        bml_p  = 9;
+    }
+    bull_cond = arg > 0;
+    if(arg == 0){ 
+        dee = 9;
+    }
+    bull_cond = (bull_val < arg) ;  
+   if(bull_cond == 0){
+        echo(bull_val);
+    }
+}
+#----- func end
+
+test1= 212;
+comp(test1);
+

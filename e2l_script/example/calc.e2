@@ -1,0 +1,22 @@
+func abc( i ){
+    b = 2* i;
+    return b;
+}
+
+e=abc( 2 );
+echo(e);
+
+ret= ( 2 * (5  + 1) + 8 / 2 ) * 2;
+echo(ret);
+
+ret= (1 + 2) * 5 * 2 + abc(3);
+echo(ret);
+
+a= 3;
+a+=3;
+echo(a);
+
+x=2;
+z=9;
+x= (x + 2*z)/3;
+echo(x);

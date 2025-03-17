@@ -1,0 +1,13 @@
+
+#e_9=10;
+#echo(e_9);
+#num=8;
+#e_10 = e_9 + num + __argc;
+#echo(e_10);
+
+#echo(__argc);
+
+a=8854;
+b=5;
+c=a*b;
+echo(c);

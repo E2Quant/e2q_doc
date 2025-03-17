@@ -1,0 +1,19 @@
+
+import <mod/mod2.e2>
+import <mod/mod3.e2>
+
+func test(){
+}
+
+func abc( c ){
+    a=mod2(c);   
+    echo(a);
+    test();
+}
+
+
+
+mod3();
+abc(7);
+
+a=1;

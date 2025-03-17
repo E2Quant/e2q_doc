@@ -1,0 +1,16 @@
+
+func aaa(){
+
+    return 9;
+} 
+
+
+func label(a){
+    b=21;
+    e = aaa();
+    b = b + e + aaa();
+    
+    return b;
+}
+a=label(-3);
+echo(a);

@@ -1,0 +1,123 @@
+#
+# 内存ID
+#
+union memoryid{
+    open=0;
+    low=1;
+    high=2;
+    close=3;
+
+    ma15=4;
+    ma20=5;
+}
+
+#
+# HEIKEN ASHI 烛形值 
+#
+union bar{
+    open=0;
+    low=0;
+    high=0;
+    close=0; 
+    union ext{
+        vol=0;
+        time=0;
+    }
+}
+
+#
+# ma 值的变量
+#
+union ma_struct{
+    period_sum = 0;
+}
+
+#
+# HEIKEN ASHI 烛定义
+#
+func heiken(){
+    open = getOpen();
+    high = getHigh();
+    low = getLow();
+    close = getClose();
+
+    bar.close = (open + high + low + close)/4;
+
+# 上一笔的值
+    close_pre = read(memoryid.close, 1);
+    open_pre = read(memoryid.open, 1);
+
+    bar.open = (close_pre + open_pre) / 2;
+
+    oc_max = max(bar.open, bar.close);
+    bar.high = max(high, oc_max);
+
+    oc_min = min(bar.open, bar.close);
+    bar.low = min(low, oc_min);
+}
+
+
+#
+# MA - Moving average
+# arg:
+#   timeperiod 周期
+#   mid 内存 ID
+#
+func ma(timeperiod, mid){
+    previous_day = last(bar.close, timeperiod);
+    current_close = last(bar.close, 0);
+
+# 从内存中读取上一笔的最新一笔值
+    ma_struct.period_sum = read(mid, 0);
+    ma_struct.period_sum = ma_struct.period_sum + current_close - previous_day;
+# 在内存中保存 ma_struct.period_sum  以免下一次读出来
+    write(ma_struct.period_sum, mid);
+
+    val =  ma_struct.period_sum / timeperiod;
+    return val; 
+}
+
+#
+# 是否开仓
+#
+func buy(condition){
+# 如果大于 10 就开仓
+    if(condition > 10){
+        Long(10);
+    }
+}
+
+#
+# 初始化
+#
+func init(){
+
+}
+
+#
+# 策略入口
+#
+func main(){
+#
+# 15 天平均线
+#  这是一个临时变量
+    ma_15=15;
+
+    ret_15 = ma(ma_15,memoryid.ma15);
+    echo(ret_15);
+
+##
+#  将结果保存了到 ID = 2 的内存中去，以便下一次读取出来 
+## 
+    write(ret_15, 2);
+
+## 检查开仓
+    buy(ret_15);
+}
+
+#
+# 运行策略
+#
+main();
+
+

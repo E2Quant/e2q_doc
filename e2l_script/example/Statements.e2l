@@ -1,0 +1,59 @@
+func abc(a){
+    b=10 + a; 
+    return b; 
+}
+
+union myunion{
+    a=1;
+    union inner_union{
+      b=1;
+    }
+}
+
+func afor(a){
+    x=9;
+    for(b=a;b<10;b++){
+        x=x+b;
+    }
+
+    return x;
+}
+
+
+func label(a){
+    b=1;
+    if(a>=5){
+        b=2;
+    }else{
+        b=5;
+    }
+    return b;
+}
+
+func uik(a){
+b=2;
+ while ( a < 5 ){
+    a= a+b;
+#    echo(a);
+}
+return a;
+}
+
+b=uik(1);
+echo(b);
+
+c = abc(5);  
+c++;
+b = 1+1;
+#  目前先不支持
+#int1 = b;
+b = c + myunion.a + myunion.inner_union.b;
+echo(b);
+
+e = 10;
+k=label(9);
+echo(k);
+
+s= afor(2);
+echo(s);
+

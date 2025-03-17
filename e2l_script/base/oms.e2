@@ -1,0 +1,218 @@
+#------------
+#
+# test Broker risk and oms e2l quant script
+#
+#------------
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  目前采用通达信的方式来计算 
+#--------	
+func hfq( cfi_code ) {
+    hprice = FExDivPrice(cfi_code);
+    if ( hprice == 0 ) {
+        return 0;
+    }
+    size = FExDividendSize(cfi_code);
+    if (size == 0) {
+        return 0;
+    }
+    idx_init = size - 1;
+    all_share = 0;
+
+    for (idx = idx_init;idx>=0;idx--) {
+
+        cash = FExDividendCash(cfi_code,idx);
+        share = FExDividendShare(cfi_code,idx);
+
+        if(share > 0){
+         
+            hprice += share * hprice + cash;
+        }else{
+            hprice += cash;
+        }
+    }
+
+    return hprice; 
+}
+#----- func end
+
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func kafka_data() {
+    _sbroker="kafkaserver:9092";
+    _stopic="fix-events";
+    _ltopic="e2l-log"; 
+
+#-------
+# 源数据作为周期的一个单位
+#-------
+
+    FMkkf(_sbroker);
+    FTopicTick(_stopic);
+    FTopicLog(_ltopic);
+
+    FMkType(UMKType.Mk_Bar);  
+}
+#----- func end
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  A  股票 交易的配置 
+#--------	
+func Astock() {
+#---------- 
+#
+#交易时ddf
+# sz sh
+#  '上午 09:30——11:30'
+#  '下午 13:00——15:00'
+#
+#  hk 
+#  '下午 15:05——15:30'
+#----------
+
+    FTradeTime(9,30,11,30);
+    FTradeTime(13,0,15,0);
+
+#----------
+# 时间的索引
+#----------
+# _symbol="sh000001";
+# _syms = "sh605277,sz002049";
+# KfConsumeCb::SymbolInit 
+
+# 设置成观察者模式
+#    FSettlInst(USettleInstMode.S_Observer);
+# 结算模式，但余额不再增加
+    FSettlInst(USettleInstMode.S_Settle);
+
+#default day
+# ioc 
+    FTimeInForce(UTimeInForce.Tif_Immediate_Or_Cancel); 
+
+    _sccy="rmb";
+    _ncms = 0.01;
+
+    FCommission(_ncms, _sccy);
+
+# 由kafka 控制 offer time
+#FOfferTime(100);
+#--------------------
+#   只能做多
+#--------------------
+    FTradeMode(USymbolTradeMode.M_LongOnly);
+
+    FMatchEventInit(UMatchEvent.ME_Close);    
+#    FMatchEventInit(UMatchEvent.ME_OrderIn);
+
+
+# T + 0
+#    FSettlement(0);
+}
+#----- func end
+
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func config() {
+    _scfg="/opt/e2q/cfg/executor.cfg";
+    FFix(_scfg);
+
+    kafka_data();
+    Astock() ;
+
+#    ABook() ;
+    ver = "1.2.8";
+    FQuantVersion(ver);
+
+}
+#----- func end
+
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  可以计算风险 
+#--------	
+func risk() {
+   
+    return 1; 
+}
+#----- func end
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func main_oms(arg0, arg1) {
+    isInit = FIsInit();
+    bid = 1;
+    _ret = -1;
+
+    if (isInit == UInitOk.I_Proc) {
+        config();     
+    } 
+
+    if(isInit == UInitOk.I_OK){ 
+
+        if (arg0 == UOMSRisk.I_OMS) {
+            _ret = hfq(arg1);
+
+        }else{
+            _ret = risk();
+
+            if( arg1 == bid){
+                FGiveaway();
+            }
+
+        }
+    }
+
+    return _ret;
+
+}
+#----- func end
+
+#-------------------
+# script oms start
+#-------------------
+
+#__arg0 union OMSRisk
+#__arg1 cfi or ask_or_bid
+
+ret = main_oms(__arg0, __arg1);

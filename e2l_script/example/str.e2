@@ -1,0 +1,9 @@
+a="123 :MethodCall::codeGen(e2::CodeGenContext&)";
+call(a);
+#c=111;
+#echo(c);
+
+char=tochar();
+call(char);
+
+a=10;

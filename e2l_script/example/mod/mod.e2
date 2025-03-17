@@ -1,0 +1,6 @@
+
+
+func mod_three( val ) {
+    ret = val + 5;
+    return ret;
+}

@@ -1,0 +1,11 @@
+func abc(a){
+    x=9;
+    for(b=a;b<10;b=b+1){
+        x=x+b;
+    }
+
+    return x;
+}
+
+s= abc(2);
+echo(s);

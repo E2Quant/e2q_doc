@@ -1,0 +1,13 @@
+union myfun{
+    a=1;
+}
+
+func abc(a){
+    b=10 + a; 
+    return b; 
+}
+
+c = abc(5);
+b = c+ myfun.a;
+echo(b);
+

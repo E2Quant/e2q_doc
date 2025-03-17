@@ -1,0 +1,6 @@
+union myun{
+    t=6;
+}
+a= myun.t + 1;
+
+

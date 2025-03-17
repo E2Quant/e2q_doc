@@ -1,0 +1,11 @@
+func abc(a){
+b=2;
+ while ( a < 5 ){
+    a= a+b;
+    echo(a);
+}
+return a;
+}
+
+b=abc(1);
+echo(b);

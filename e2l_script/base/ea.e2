@@ -1,0 +1,182 @@
+#------------
+#
+# test EA quant script
+#
+#------------
+
+#--------
+# Name: union
+# Description: 
+#  
+#--------	
+
+union ISymbols { 
+    index = 0; #  sh000001=0;
+    cficode = 179591; # start
+        next = 1;  #   next step
+}
+
+#----- union end
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func CfiCode() {
+ 
+    cfi = ISymbols.cficode + FProcessRuns();
+    return cfi;
+}
+#----- func end
+
+#--------
+# Name: ProcCfi
+#   Parameters:
+# - pid:  进程 id
+# -> return 
+# Description: 
+#  可以为不同的进程，定制cficode 
+# code = "601138.ss";
+# FCFICode(code);
+#  FSymbol(ISymbols.index);
+#--------	
+func ProcCfi(process_id) {
+    cficode = CfiCode() ; 
+    FSymbol(cficode);   
+
+# 100 万，最少值 1 万
+    cash = 100;
+    FSetCash(cash);  
+
+}
+#----- func end
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#   ProcessInitData use init time frame 
+#--------
+func PFrame(){
+
+    tframe =  UTimeFrames.Period_D1 ; 
+
+    FTFrame(tframe);
+
+#FTFrame(UTimeFrames.Period_M); ## 5 minutes
+#FTFrame(UTimeFrames.Period_M15); ## 15 minutes
+#FTFrame(UTimeFrames.Period_M30); ## 30 minutes
+#FTFrame(UTimeFrames.Period_H1);  ## 1 hours
+#FTFrame(UTimeFrames.Period_H4);  ## 4 hours
+#FTFrame(UTimeFrames.Period_D1);  ## 1 day
+#FTFrame(UTimeFrames.Period_W1);  ## 1 week
+#FTFrame(UTimeFrames.Period_MN1);  ## 1 month
+
+}
+#----- func end
+
+#--------
+# Name:  ea_config
+#   Parameters:
+# -> return 
+# Description: 
+#  全局配置
+#--------	
+
+func ea_config(){
+    _scfg = "/opt/e2q/cfg/tradeclient.cfg";
+    FFix(_scfg); 
+
+    _sbroker="kafkaserver:9092";
+    _ltopic="e2l-log"; 
+
+    FMkkf(_sbroker);
+    FTopicLog(_ltopic);
+
+# 设置 策略的唯一 id
+# FQuantId(_nqid);
+
+# 设置 offers
+    FOffers(UOffers.OF_Index);
+# gmt
+    FGmt();
+# 设置 on-open
+#    FOnOpen();
+
+}
+#----- func end
+
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func ProcessInitData( pid) {
+    _nscript=FIsInit();
+    _ok = UBool.B_TRUE;
+#-------------------
+# script machine init
+#-------------------
+    if(_nscript == UInitOk.I_Proc){  
+        ProcCfi( pid ); 
+
+        PFrame();
+
+        ea_config();  
+        FVersion();                                 
+
+# thread number
+        size = 1;
+        FThread(size);
+        _ok = UBool.B_FALSE;
+
+    } 
+
+    return _ok;
+}
+#----- func end
+
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func ea_enter(tick_size, thread_id) {
+    
+    pid = FProcessId();
+
+    isOk = ProcessInitData( pid) ;
+    if (isOk == UBool.B_TRUE) {
+        code =  CfiCode() ; 
+        timeframe =  UTimeFrames.Period_D1 ; 
+
+        fclose = FClose(code, timeframe, 0);
+        echo(fclose); 
+    }
+
+}
+#----- func end
+
+#-------------------
+# script ea start
+#-------------------
+
+ret = ea_enter(__arg0, __arg1);

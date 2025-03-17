@@ -1,0 +1,37 @@
+import <module/mod.e2>
+
+#--------
+# Name:main
+#   Parameters:
+# - arg1: input number 
+# -> return 
+# Description: 
+#   main run 
+#--------	
+func main( var ) {
+    var1 = hello(); 
+    var2 = world( var1 , var);
+
+    echo(var2);
+
+    return 0;
+}
+#----- func end
+
+result = main(3);
+
+
+#--------
+# ++++  run command :  ++++
+# ./e2q -o /opt/e2q_hub/quant/base/hello_world.e2 
+#
+# ++++  print result:  ++++
+#
+#  80000 [echo varname: var2  line:15, file:/opt/e2q_hub/quant/base/hello_world.e2]
+#  1436561->[main.cpp::only_run line.83] ret:0
+#
+#
+#
+#--------
+
+

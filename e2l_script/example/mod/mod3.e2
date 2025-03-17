@@ -1,0 +1,7 @@
+import <mod/mod.e2>
+
+func mod3(){
+sdf=2+3;
+mod2(sdf);
+
+}

@@ -1,0 +1,22 @@
+import <mod/mod.e2>
+
+func mod2( o ){
+    ret = 2 + o;
+
+ mod_three(ret);   
+    return ret;
+}
+
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func mod2_2() {
+    a=10;
+}
+#----- func end
