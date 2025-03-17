@@ -2406,7 +2406,8 @@ FExdiShare(cfi_id);
 ---
 
 * **FGiveaway**
-> 设置交易机器人.
+> 设置交易机器人.<br/>
+> BSE: A Minimal Simulation of a Limit-Order-Book Stock Exchange [https://arxiv.org/pdf/1809.06027](https://arxiv.org/pdf/1809.06027)  
 
 > *函数原型*
 ```
