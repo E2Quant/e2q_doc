@@ -1,2 +1,7 @@
-# e2q_doc
-文档说明
+# 文档
+
+E2Q 说明文档
+
+****
+
+使用 [MkDocs](https://www.mkdocs.org/) 编写
