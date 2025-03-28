@@ -80,6 +80,38 @@ FAccountEquity();
 
 ---
 
+* **FThreadPosition**
+> 返回账户通过多线程分配仓位测试策略.
+
+> *函数原型*
+```
+FThreadPosition(thread_number, postion);
+```
+> *说明*
+
+- 参数：thread_number 数值.
+    - postion 仓位数值
+- 返回值: 当前 fix session 的当前资产净值
+
+> 示例:
+```
+  # 设置各个线的仓位
+##  平分不同的线程
+    all = 100;
+    # 线程数量
+    thread_num = 3;
+    pos =  all / thread_num;
+   # 取整数 fpos = 33.0;
+    fpos = FFloor(pos);
+    
+    for (a=0;a<thread_num;a++) {
+        FThreadPosition(a, fpos);
+    }
+
+```
+
+---
+
 ## 初始化函数
 
 * **FIsInit**
