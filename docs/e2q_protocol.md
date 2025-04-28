@@ -9,12 +9,12 @@
 ### Init
 
 
-| Name         | Offset | Length | Value   | Notes                                                                                 |
+| Name         | Offset | Length | Value   | Notes            |
 | :------------- | -------- | -------- | --------- | --------------------------------------------------------------------------------------- |
-| Message Type | 0      | 1      | 'I'     | Init Type                                                                             |
-| stock        | 1      | 10      | Alpha   | 股票名称                                                                             |
-| cficode      | 11     | 4      | Integer | cfi code                                                                              |
-| type         | 15     | 1      | Alpha | symbol type ['i':index, 't':trade]                                                        |
+| Message Type | 0      | 1      | 'I'     | Init Type                        |
+| stock        | 1      | 10      | Alpha   | 股票名称                         |
+| cficode      | 11     | 4      | Integer | cfi code                            |
+| type         | 15     | 1      | Alpha | symbol type ['i':index, 't':trade]     |
 | TickTime     | 16      | 4      | Integer | 每一笔报价的间隔时间, 回测的时候使用的, <br/>免得策略超过这个报价的间隔时间就有点麻烦了 |
 | Aligned      | 20      | 1      | Alpha |  当前的状态 ['U': 后面还有数据, <br/>'P': 当前一个时间对齐完成]|
 

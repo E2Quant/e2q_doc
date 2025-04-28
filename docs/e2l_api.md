@@ -2020,20 +2020,23 @@ FFloor(value );
 ---
 
 * **FCFICode**
-> 打印 cfi code 的品种名称
+>  通过 idx 提取 cficode
 
 > *函数原型*
 ```
-FCFICode(cfi_id );
+FCFICode( idx );
 ```
 > *说明*
 
-- 参数： cfi_id 数值.
-- 返回值: 无.
+- 参数： idx 数值.
+- 返回值: cfi code  数值..
 
 > 示例:
 
 ```
+index = 0;
+cfi_base = FCFICode(index); 
+
 ```
 
 ---
