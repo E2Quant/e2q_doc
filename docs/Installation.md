@@ -40,7 +40,7 @@ ln -s /usr/include/llvm-c-14/llvm-c/ /usr/include/llvm-c
 
 > 开始安装
 ```
-$ git clone http://ssss
+$ git clone https://github.com/E2Quant/e2.git
 $ cd e2
 $ mkdir build
 $ cd build
@@ -58,12 +58,12 @@ sudo apt-get install -y libzstd1 libzstd-dev libquickfix-dev libquickfix17 \
 ```
 
 ```
-$ git clone http://ssss
-$ cd e2
+$ git clone https://github.com/E2Quant/e2q.git
+$ cd e2q
 
 /// 如果需要下载不同的 hub  的话，可以放在这儿
 $ cd hub
-$ git clone http://hub..
+$ git clone https://github.com/E2Quant/e2q_hub.git
 
 $ mkdir build
 $ cd build

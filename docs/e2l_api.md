@@ -306,6 +306,27 @@ union UTimeFrames {
     FPrintDeci(fclose, deci);
 
 ```
+
+---
+
+* **FDefTFrame**
+> 返回 当前默认的周期值
+
+> *函数原型*
+```
+FDefTFrame();
+```
+> *说明*
+
+- 参数：无.
+- 返回值: 返回 UTimeFrames 结构体.
+
+> 示例:
+
+```
+    tf = FDefTFrame();
+```
+
 ---
 
 * **FIndex**
@@ -2434,6 +2455,54 @@ FExdiShare(cfi_id);
 
 ```
    
+```
+
+---
+
+* **FCustomDataSize**
+> 获取自定义数据的数组大小
+
+> *函数原型*
+```
+FCustomDataSize(cfi_id, index);
+```
+> *说明*
+
+- 参数： cfi_id 数值.
+    - index 数值.
+- 返回值: 数值.
+
+> 示例:
+
+```
+    index = 0;
+    size = FCustomDataSize(cficode, index);
+    echo(size);
+```
+
+---
+
+* **FCustomDataGet**
+> 获取自定义数据的数组中 postion 的数值
+
+> *函数原型*
+```
+FCustomDataGet(cfi_id, index, postion);
+```
+> *说明*
+
+- 参数： cfi_id 数值.
+    - index 数值.
+    - postion 数值.
+- 返回值: 数值.
+
+> 示例:
+
+```
+    index = 0;
+    postion = 1;
+    value = FCustomDataGet(cficode, index, postion);
+    echo(value);
 ```
 
 ## 虚拟交易机器人
