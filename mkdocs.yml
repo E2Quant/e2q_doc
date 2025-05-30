@@ -7,5 +7,6 @@ nav:
   - E2L 语言: e2l.md
   - E2L 语言 API: e2l_api.md
   - E2Q Protocol: e2q_protocol.md
+  - E2Q SQL: pgSQL.md
   - 关于: about.md
 theme: readthedocs
