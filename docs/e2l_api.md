@@ -2505,6 +2505,29 @@ FCustomDataGet(cfi_id, index, postion);
     echo(value);
 ```
 
+---
+
+* **FCustomDataNumber**
+> 获取自定义数据的更新的次数
+
+> *函数原型*
+```
+FCustomDataNumber(cfi_id, index);
+```
+> *说明*
+
+- 参数： cfi_id 数值.
+    - index 数值.
+- 返回值: 数值.
+
+> 示例:
+
+```
+    index = 0;
+    size = FCustomDataNumber(cficode, index);
+    echo(size);
+```
+
 ## 虚拟交易机器人
 
 ---
@@ -2588,6 +2611,204 @@ FClock( );
 
 ```
    
+```
+
+---
+
+* **FYear**
+> 转换时间返回: 年().
+
+> *函数原型*
+```
+FYear( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   year = FYear(); # 2025
+```
+
+---
+
+* **FMonth**
+> 转换时间返回: 月 (1-12).
+
+> *函数原型*
+```
+FMonth( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   month = FMonth();
+```
+
+---
+
+* **FDay**
+> 转换时间返回: 日 (1-31).
+
+> *函数原型*
+```
+FDay( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   day = FDay();
+```
+
+---
+
+* **FWeek**
+> 转换时间返回: 星期值.
+
+> *函数原型*
+```
+FWeek( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值(0-6, 0=周日).
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   week = FWeek();
+```
+
+---
+
+* **FYearWeek**
+> 转换时间返回: 一年中的第几周.
+
+> *函数原型*
+```
+FYearWeek( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   week = FYearWeek();
+```
+
+---
+
+* **FHour**
+> 转换时间返回: 小时.
+
+> *函数原型*
+```
+FHour( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   hour = FHour();
+```
+
+---
+
+* **FMinute**
+> 转换时间返回: 分钟.
+
+> *函数原型*
+```
+FMinute( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   minute = FMinute();
+```
+
+---
+
+* **FSecond**
+> 转换时间返回: 秒.
+
+> *函数原型*
+```
+FSecond( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   second = FSecond();
+```
+
+---
+
+* **Fmillisecond**
+> 转换时间返回: 毫秒.
+
+> *函数原型*
+```
+Fmillisecond( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   millisecond = Fmillisecond();
 ```
 
 ## 系统函数

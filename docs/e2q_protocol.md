@@ -20,6 +20,13 @@
 
 * C++ 类
 ```
+
+struct BaseMessage {
+    char MsgType;
+    char Aligned;
+}; /* ----------  end of struct BaseMessage  ---------- */
+
+
 struct SystemInitMessage : public BaseMessage {
     char Stock[E2QSTOCK_LENGTH] = {0};
     std::uint32_t CfiCode = 0;
@@ -64,7 +71,7 @@ typedef struct SystemInitMessage SystemInitMessage;
 
 | Name         | Offset | Length | Value   | Notes                             |
 | :------------- | -------- | -------- | --------- | ------------------------- |
-| Message Type | 0      | 1      | 'X'     | Exit process                   |
+| Message Type | 0      | 1      | 'X'     |     除权分红               |
 | cficode      | 1      | 4      | Integer |  cfi code  |
 | year         | 5      | 2      | Integer |  year   |
 | month        | 7      | 2      | Integer |  month  |
@@ -104,7 +111,7 @@ typedef struct StockAXdxrMessage StockAXdxrMessage;
 
 | Name         | Offset | Length | Value   | Notes                                   |
 | :------------- | -------- | -------- | --------- | ------------------------------------------ |
-| Message Type | 0      | 1      |   'T'           | Exit process                                |
+| Message Type | 0      | 1      |   'T'           | Tick process                                |
 | cficode      | 1      | 4      |   Integer       |  cfi code  |
 | unix_time    | 5      | 8      |   Integer 64    | unix_time                                |
 | frame        | 13      | 2      |   Integer  16   | frame                                |
@@ -138,7 +145,7 @@ typedef struct MarketTickMessage MarketTickMessage;
 
 | Name         | Offset | Length | Value   | Notes                                   |
 | :------------- | -------- | -------- | --------- | ------------------------------------------ |
-| Message Type | 0      | 1      |   'C'           | Exit process                                |
+| Message Type | 0      | 1      |   'C'           | Custom process                                |
 | cficode      | 1      | 4      |   Integer       |  cfi code  |
 | index         | 5     | 2      |   Integer 16    | value deci                                |
 | size         | 7      | 2      |   Integer 16    | value deci                                |
@@ -183,7 +190,7 @@ echo(size);
 
 | Name         | Offset | Length | Value   | Notes                                   |
 | :------------- | -------- | -------- | --------- | ------------------------------------------ |
-| Message Type | 0      | 1      |   'L'           | Exit process                                |
+| Message Type | 0      | 1      |   'L'           | Log process                                |
 | logt          | 1      | 2      |  Alpha    |  LogType_t   BASE = 'B', <br/>LINE = 'L', PRO = 'P', TIME = 'T'|
 | numt          | 1      | 3      |  Alpha   |  NumberType_t    NEGATIVE = 'N', <br/>// -1121  POSITIVE = 'P'   // 2323 |
 | val          | 4      | 8      |   Integer 64    |  variable value  |
