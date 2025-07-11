@@ -635,6 +635,41 @@ FCurrentLS();
    lot = FLotAndShare(lot);
 ```
 
+---
+
+* **FWhois**
+> 返回当前是哪一个属性
+
+> *函数原型*
+```
+FWhois();
+```
+> *说明*
+
+- 参数： 无.
+- 返回值: 返回 UOMSRisk 结构体.
+
+> 结构体 **USymbolTradeMode**
+```
+union UOMSRisk{ 
+    # OMS 是柜台撮合中心
+    I_OMS = 0;    
+    # 代理商
+    I_BROKER = 1;
+    # 策略者
+    I_EA = 2;
+} 
+```
+
+> 示例:
+
+```
+   me = FWhois();
+    if(me == UOMSRisk.I_OMS){
+        echo(me);
+    }
+```
+
 ## 交易函数
 
 ---
@@ -1494,6 +1529,25 @@ FStoreId( );
 
 ---
 
+* **FisStore**
+> 检查 id 是不是初始化或者是不是存在
+
+> *函数原型*
+```
+FisStore( id );
+```
+> *说明*
+
+- 参数： ID 数值.
+- 返回值:  返回 UBool 结构体.
+
+> 示例:
+
+```     
+```
+
+---
+
 * **FFetch**
 > 获取缓存数据
 
@@ -1983,6 +2037,25 @@ FStdev(value );
 
 ---
 
+* **FArrayStdev**
+> 返回 对数组进行  的 stdev
+
+> *函数原型*
+```
+FArrayStdev(array_id );
+```
+> *说明*
+
+- 参数： array_id 数值.
+- 返回值: 数值.
+
+> 示例:
+
+```
+```
+
+---
+
 * **FAbs**
 > 返回 value 的 abs
 
@@ -2318,6 +2391,27 @@ FOnOpen();
 > *函数原型*
 ```
 FBarSize(cfi_id, timeframe);
+```
+> *说明*
+
+- 参数： cfi_id 数值.
+    - timeframe 周期
+- 返回值: 数值.
+
+> 示例:
+
+```
+   
+```
+
+---
+
+* **FBarNumber**
+> 获取当前周期整体能保存多长根柱子
+
+> *函数原型*
+```
+FBarNumber(cfi_id, timeframe);
 ```
 > *说明*
 
@@ -2876,7 +2970,7 @@ FProcessRuns(  );
 ---
 
 * **FThreadId**
-> 打印当前线程的 id
+> 返回当前线程的 id
 
 > *函数原型*
 ```
@@ -2885,7 +2979,7 @@ FThreadId(  );
 > *说明*
 
 - 参数： 无. 
-- 返回值:  无.
+- 返回值:  数值.
 
 > 示例:
 

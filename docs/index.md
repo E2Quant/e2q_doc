@@ -14,17 +14,19 @@
 
 ```shell
 /opt/e2q/build (master) $ ./e2q -h
-./e2q -e script.e2 
-                 Usage: 
-                 -h help 
-                 -e which loading ea e2l script 
-                 -s which loading oms e2l script 
-                 -p which loading db properties 
-                 -l debug e2l 
-                 -r e2l run number 
-                 -o only test e2l script 
+./e2q -e script.e2
+                 Usage:
+                 -h help
+                 -e which loading ea e2l script
+                 -s which loading oms e2l script
+                 -p which loading db properties
+                 -l show llvm ir for e2l
+                 -r e2l run number
+                 -o only test e2l script
                  -v show e2q version
-                 -d daemon run 
+                 -f log directory
+                 -i e2l import codes directory,def:/usr/local/include/e2/
+                 -d daemon run
 ```
 > 引导入口的 script 是由 e2l 语言开发
 
