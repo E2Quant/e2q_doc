@@ -1404,6 +1404,26 @@ union UBookType {
 ```
 
 ## 普通函数
+---
+
+* **FIsDebug**
+> 打印 数据 
+
+> *函数原型*
+```
+FIsDebug( bool );
+```
+> *说明*
+
+- 参数： bool 是 e2::Bool 结构体
+- 返回值: 无.
+
+> 示例:
+
+```
+    # 正常打印
+    FIsDebug(UBool.B_TRUE);
+```
 
 ---
 
@@ -1679,7 +1699,7 @@ FArrayShare( id);
 ---
 
 * **FArrayAdd**
-> 往数组添加数值
+> 往数组添加数值, 最新的值添加在最后一个索引中
 
 > *函数原型*
 ```
@@ -1749,7 +1769,7 @@ FArrayUpdate( id， index, value);
 ---
 
 * **FArrayGet**
-> 获取数组某一个索引的数值
+> 获取数组某一个索引的数值, 最后一个 idx 索引是最新的值
 
 > *函数原型*
 ```
@@ -1764,6 +1784,16 @@ FArrayGet( id， index);
 > 示例:
 
 ```
+id = FStoreId();
+FArray(id, 5);
+FArrayAdd(id, tick_size);
+idx = FArraySize(id);
+idx = idx - 1;
+echo(idx);
+val = FArrayGet(id, idx);
+echo(val);
+
+
 ```
 
 ---
@@ -1826,7 +1856,7 @@ FArrayLength( id);
 ---
 
 * **FArraySize**
-> 取数组设置的长度
+> 取数组当前的长度, 即现在添加了多少个值
 
 > *函数原型*
 ```

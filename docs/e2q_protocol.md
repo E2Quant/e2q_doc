@@ -432,7 +432,7 @@ private:
 
 ```
 
-### 给 [E2Language](/e2l) 语言调用的 API 
+### 给 [E2Language](https://github.com/E2Quant/e2) 语言调用的 API 
 
 ```
 /*
