@@ -502,6 +502,27 @@ FQuantVersion(version);
 
 ---
 
+* **FVersionId**
+> 返回当前策略版本号id.
+
+> *函数原型*
+```
+FVersionId();
+```
+> *说明*
+
+- 参数： 无.
+- 返回值: ID 数值.
+
+> 示例:
+
+```
+
+  vid = FVersionId();
+```
+
+---
+
 * **FTradeTime**
 > 设置交易时间.
 

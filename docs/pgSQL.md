@@ -75,29 +75,8 @@ stat    | init
 ```
 ---
 
-###  3.账户资金波动
 
-* **e2q_fix_cash**
-
-> **说明:**
-    账户资金波动.
-
-
-> 示例:
-```
-E2Q=> select * from e2q_fix_cash;
--[ RECORD 1 ]--+----------
-targetcompid   | CLIENT874
-max_credit     | 1016259
-mix_credit     | 1000000
-credit         | 1000000
-pre_mix_credit | 0
-pre_max_credit | 0.016259
-
-```
----
-
-###  4.订单历史记录
+###  3.订单历史记录
 
 * **e2q_history**
 
@@ -157,7 +136,7 @@ qty          | 1
 
 ---
 
-###  5.订单的仓位情况
+###  4.订单的仓位情况
 
 * **e2q_postion**
 
@@ -188,58 +167,7 @@ rule    | mode_m_8/17/30/60
 
 ---
 
-###  6.订单最原始的记录
-
-* **e2q_primitive**
-
-> **说明:**
-    回测过程中的关于订单如何在数据表中记录的情况.
-
-
-> 示例:
-```
-E2Q=> SELECT * FROM "e2q_primitive" limit 2;
--[ RECORD 1 ]---------------------
-verid     | 1
-id        | 1
-stat      | 0
-side      | 1
-price     | 1814.89
-adjpx     | 0
-stoppx    | 0
-cumqty    | 0
-leavesqty | 0
-openqty   | 0
-qty       | 4
-date      | 2023-11-03 00:00:00+08
-argv      | 8/17/30/60
-name      | mode_m
-ticket    | 1032451500
-closetck  | 0
-amount    | 0
--[ RECORD 2 ]---------------------
-verid     | 1
-id        | 2
-stat      | 2
-side      | 1
-price     | 1811.24
-adjpx     | 11127.425
-stoppx    | 0
-cumqty    | 4
-leavesqty | 0
-openqty   | 0
-qty       | 4
-date      | 2023-11-03 00:00:00+08
-argv      | 8/17/30/60
-name      | mode_m
-ticket    | 1032451500
-closetck  | 0
-amount    | 724496
-```
-
----
-
-###  7.参数的收益值
+###  5.参数的收益值
 
 * **e2q_profit**
 
@@ -250,31 +178,31 @@ amount    | 724496
 > 示例:
 ```
 E2Q=> SELECT * FROM "e2q_profit" limit 2;
--[ RECORD 1 ]+-----------
-name         | mode_m
-argv         | 8/17/30/60
+-[ RECORD 1 ]+-------------
+name         | mode_ma
+argv         | 15/39
 version      | 1.3.0
-quantid      | 1032451501
-init_cash    | 1000000
-profit       | 0
-postion      | 0
+quantid      | 1036343292
+init_cash    | 200000.00298
+profit       | 198860.003
+postion      | 0.2
 verid        | 1
-targetcompid |
--[ RECORD 2 ]+-----------
-name         | mode_m
-argv         | 8/17/30/60
+targetcompid | CLIENT2851
+-[ RECORD 2 ]+-------------
+name         | mode_vma
+argv         | 5/13
 version      | 1.3.0
-quantid      | 1032451498
-init_cash    | 1000000
-profit       | 0
-postion      | 0
+quantid      | 1036343281
+init_cash    | 200000.00298
+profit       | 199148.003
+postion      | 0.2
 verid        | 1
-targetcompid | CLIENT874
+targetcompid | CLIENT2852
 
 ```
 ---
 
-###  8.风险(MVO)
+###  6.风险(MVO)
 
 * **e2q_risk_performance**
 
@@ -303,7 +231,7 @@ day     | 2024-07-30 00:00:00+08
 
 ---
 
-###  9.收益曲线(包含风险)
+###  7.收益曲线(包含风险)
 
 * **e2q_risk_profit**
 
@@ -343,7 +271,7 @@ profit_pre | -0.025
 ```
 ---
 
-### 10.个股的风险仓位分布
+### 8.个股的风险仓位分布
 
 * **e2q_risk_value**
 
@@ -370,7 +298,7 @@ verid   | 5
 
 ---
 
-###  11.股票池
+###  9.股票池
 
 * **e2q_symbol_pool**
 
@@ -380,17 +308,27 @@ verid   | 5
 
 > 示例:
 ```
-E2Q=> select * from e2q_symbol_pool;
- verid | stock  | trader_number | trading_number
--------+--------+---------------+----------------
-     1 | 600048 |             5 |              0
-(1 row)
+E2Q=>  select * from e2q_symbol_pool limit 2;
+-[ RECORD 1 ]--+-----------
+quantid        | 1036343281
+count          | 2
+verid          | 1
+stock          | 600048
+trader_number  | 2
+trading_number | 0
+-[ RECORD 2 ]--+-----------
+quantid        | 1036343282
+count          | 6
+verid          | 1
+stock          | 600048
+trader_number  | 5
+trading_number | 1
 
 ```
 
 ---
 
-###  12.正在交易中
+###  10.正在交易中
 
 * **e2q_trading**
 
@@ -400,11 +338,33 @@ E2Q=> select * from e2q_symbol_pool;
 
 > 示例:
 ```
-E2Q=> select * from e2q_trading;
- id | verid | symbol | stock | open_price | open_qty | open_time | ticket | amount | quantid | name | argv
-----+-------+--------+-------+------------+----------+-----------+--------+--------+---------+------+------
-(0 rows)
-
+E2Q=> select * from e2q_trading limit 2;
+-[ RECORD 1 ]-----------
+id         | 1571
+verid      | 5
+symbol     | 294522
+stock      | 600028
+open_price | 4.12
+open_qty   | 435
+open_time  | 2022/11/02
+ticket     | 1036344727
+amount     | 179220
+quantid    | 1036345708
+name       | mode_adxvma
+argv       | 25/65
+-[ RECORD 2 ]-----------
+id         | 1952
+verid      | 6
+symbol     | 294523
+stock      | 601398
+open_price | 4.32
+open_qty   | 46
+open_time  | 2022/12/28
+ticket     | 1036345108
+amount     | 19872
+quantid    | 1036346309
+name       | mode_adxvma
+argv       | 20/52
 
 ```
 
@@ -436,193 +396,298 @@ mode         | mode_ha
 
 ```
 
+---
+
+###  2.各个账号的账号的资金变动概要(日)
+
+* **quant_account_credit**
+
+> **说明:**
+    各个账号的账号的资金变动概要(日).
+
+    - 参数: version_id 
+
+> 示例:
+```
+E2Q=> SELECT * FROM quant_account_credit(1) limit 2;
+-[ RECORD 1 ]+-----------------------
+credit       | 1000000
+targetcompid | CLIENT2850
+pday         | 2022-07-27 00:00:00+08
+-[ RECORD 2 ]+-----------------------
+credit       | 980968
+targetcompid | CLIENT2850
+pday         | 2022-08-03 00:00:00+08
+
+```
 
 ---
 
-###  2.资金波动
+###  3.各个账号的资金波动(最大/小的百分比)
+
+* **quant_account_credit_bands**
+
+> **说明:**
+    各个账号的资金波动(最大/小的百分比).
+
+    - 参数: version_id 
+
+> 示例:
+```
+E2Q=> SELECT * FROM quant_account_credit_bands(1) limit 2;
+-[ RECORD 1 ]-+-----------------------
+btargetcompid | CLIENT2852
+bmax_credit   | 1000252
+bmin_credit   | 990243
+binit_credit  | 1000000
+bmpday        | 2022-08-16 00:00:00+08
+-[ RECORD 2 ]-+-----------------------
+btargetcompid | CLIENT2850
+bmax_credit   | 1000000
+bmin_credit   | 899328
+binit_credit  | 1000000
+bmpday        | 2022-07-27 00:00:00+08
+
+```
+
+---
+
+###  4.各个账号的收益曲线(日)
+
+* **quant_account_credit_day**
+
+> **说明:**
+    各个账号的收益曲线(日).
+
+    - 参数: version_id 
+
+> 示例:
+```
+E2Q=> SELECT * FROM quant_account_credit_day(1) limit 2;
+-[ RECORD 1 ]-+-----------------------
+dcredit       | 1000000
+dtargetcompid | CLIENT2850
+dpday         | 2022-07-27 00:00:00+08
+dreturn_value | 0
+-[ RECORD 2 ]-+-----------------------
+dcredit       | 980968
+dtargetcompid | CLIENT2850
+dpday         | 2022-08-03 00:00:00+08
+dreturn_value | -1.9032
+
+```
+
+---
+
+###  5.各个账号的收益曲线(月)
+
+* **quant_account_credit_month**
+
+> **说明:**
+    各个账号的收益曲线(月).
+
+    - 参数: version_id 
+
+> 示例:
+```
+E2Q=> SELECT * FROM quant_account_credit_month(1) limit 2;
+-[ RECORD 1 ]-+-----------
+dcredit       | 1000000
+dtargetcompid | CLIENT2850
+dpday         | 2022-07
+dreturn_value | 0
+-[ RECORD 2 ]-+-----------
+dcredit       | 899328
+dtargetcompid | CLIENT2850
+dpday         | 2022-08
+dreturn_value | -10.0672
+
+```
+
+---
+
+###  6.各个账号的累计收益(%)
+
+* **quant_account_credit_sum**
+
+> **说明:**
+    各个账号的累计收益(%).
+
+    - 参数: version_id 
+
+> 示例:
+```
+E2Q=> SELECT * FROM quant_account_credit_sum(1) limit 2;
+-[ RECORD 1 ]-+-----------------------
+dcredit       | 1000000
+dtargetcompid | CLIENT2850
+dpday         | 2022-07-27 00:00:00+08
+dreturn_value | 0
+-[ RECORD 2 ]-+-----------------------
+dcredit       | 980968
+dtargetcompid | CLIENT2850
+dpday         | 2022-08-03 00:00:00+08
+dreturn_value | -1.9032
+
+```
+
+---
+
+###  7.各个 QuantId 的资金波动(最大/小的百分比)
 
 * **quant_bands**
 
 > **说明:**
-    资金波动.
+    各个 QuantId 的资金波动(最大/小的百分比).
 
     - 参数: version_id 
 
 > 示例:
 ```
 E2Q=> SELECT * FROM quant_bands(1) limit 2;
--[ RECORD 1 ]-------------------
+-[ RECORD 1 ]----------------------
 idxs      | 1
-quantid   | 1032131610
-name      | mode_ha
-argv      | 22
-init_cash | 1000000
-min_pro   | 827898.32
-max_pro   | 1064416
-min_diff  | -0.17210168000000006
-max_diff  | 0.064416
--[ RECORD 2 ]-------------------
+quantid   | 1036343299
+name      | mode_adxvma
+argv      | 5/13
+init_cash | 200000.00298
+min_pro   | 171021
+max_pro   | 200000
+min_diff  | -14.489501274106425
+max_diff  | -1.4899999729002438e-06
+-[ RECORD 2 ]----------------------
 idxs      | 2
-quantid   | 1032131612
-name      | mode_ha
-argv      | 32
-init_cash | 1000000
-min_pro   | 931100.4500000001
-max_pro   | 1017375
-min_diff  | -0.06889954999999993
-max_diff  | 0.017375
-
+quantid   | 1036343301
+name      | mode_adxvma
+argv      | 15/39
+init_cash | 200000.00298
+min_pro   | 180968
+max_pro   | 200000
+min_diff  | -9.516001348211574
+max_diff  | -1.4899999729002438e-06
 
 ```
 
 ---
 
-###  3.资金情况
+###  8.订单交易时长比较(天)
+
+* **quant_order_day**
+
+> **说明:**
+    各个 QuantId 的资金波动(最大/小的百分比).
+
+    - 参数: version_id 
+
+> 示例:
+```
+E2Q=> SELECT * FROM quant_order_day(1) limit 2;
+-[ RECORD 1 ]-----------
+rquantid    | 1036343300
+order_stock | 600048
+order_day   | 7
+-[ RECORD 2 ]-----------
+rquantid    | 1036343299
+order_stock | 600048
+order_day   | 8
+
+```
+
+---
+
+###  9.订单收益过程中涨跌波幅张度(%)
+
+* **quant_order_tl**
+
+> **说明:**
+    订单收益过程中涨跌波幅张度(%).
+
+    - 参数: version_id 
+
+> 示例:
+```
+E2Q=> SELECT * FROM quant_order_tl(1) limit 2;
+-[ RECORD 1 ]--------
+rquantid | 1036343300
+rvalue   | -5.42
+rticket  | 1036343155
+rvtype   | loss
+-[ RECORD 2 ]--------
+rquantid | 1036343300
+rvalue   | -8.409
+rticket  | 1036343155
+rvtype   | order
+
+```
+
+---
+
+###  10.策略 ID 资金的详细变化.
+
+* **quant_profit**
+
+> **说明:**
+    订单收益过程中涨跌波幅张度(%).
+
+    - 参数: quant_id 
+
+> 示例:
+```
+E2Q=> SELECT * FROM quant_profit(1036343292) limit 2;
+-[ RECORD 1 ]-------------------
+qid        | 1036343292
+margin     | 9140
+rticket    | 243
+profits    | 0
+pday       | 2024-01-12 00:00:00
+pside      | 1
+profit_x   | 200000
+profit_sum | 200000
+-[ RECORD 2 ]-------------------
+qid        | 1036343292
+margin     | 0
+rticket    | 272
+profits    | 8000
+pday       | 2024-04-16 00:00:00
+pside      | 2
+profit_x   | -1140
+profit_sum | 198860
+
+```
+
+
+---
+
+###  11.资金的详细变化.
 
 * **quant_profit**
 
 > **说明:**
     资金的详细变化.
 
-    - 参数: quantid 
-    - 参数: credit
-
-
-> 示例:
-```
-E2Q=> SELECT
-    pday as "时间",
-    profit_sum AS "资金",
-    CASE
-        WHEN pside = 1 THEN '开仓'
-        ELSE '平仓'
-    END AS "状态"
-from "quant_profit" (
-        (
-            SELECT "quantid"
-            from "analse"
-            LIMIT 1
-        ), (
-            SELECT "credit"
-            from "trade_report"
-            ORDER BY id
-            LIMIT 1
-        )
-    );
-        时间         |  资金  | 状态
----------------------+--------+------
- 2023-11-14 00:00:00 | 500000 | 开仓
- 2023-11-16 00:00:00 | 498487 | 平仓
- 2024-01-26 00:00:00 | 498487 | 开仓
- 2024-03-04 00:00:00 | 483255 | 平仓
- 2024-03-14 00:00:00 | 483255 | 开仓
- 2024-03-22 00:00:00 | 474375 | 平仓
- 2024-04-26 00:00:00 | 474375 | 开仓
- 2024-05-27 00:00:00 | 495412 | 平仓
- 2024-07-17 00:00:00 | 495412 | 开仓
- 2024-07-29 00:00:00 | 477628 | 平仓
-(10 rows)
-
-```
-
----
-
-###  4.模型列表(风险)
-
-* **quant_profit_mvo**
-
-> **说明:**
-    按版本查看不同账号资金情况.
-
-    - 参数: atype 
-
-> 示例:
-```
-E2Q=> SELECT * FROM quant_profit_mvo(1);
--[ RECORD 1 ]+----------
-targetcompid | CLIENT845
-sessionid    | 845
-balance      | 925602.88
-margin       | 0
-all_cash     | 925602.88
-mode         | mode_ha
-
-```
-
----
-
-###  5.可从版本号取资金情况
-
-* **quant_profit_one_verid**
-
-> **说明:**
-    资金的详细变化.
-    
     - 参数: verid 
-    - 参数: offset
+    - 参数: offset 
 
 > 示例:
 ```
-E2Q=> SELECT * from quant_profit_one_verid (1,0) limit 2;
+E2Q=>  SELECT * FROM quant_profit_one_verid(1,0) limit 2;
 -[ RECORD 1 ]--------------------
-vday        | 2015-06-12 00:00:00
-vprofit_sum | 1000000
+vday        | 2022-07-27 00:00:00
+vprofit_sum | 200000
 stat        | 开仓
-pqid        | 1032131610
+pqid        | 1036343299
 qverid      | 1
 -[ RECORD 2 ]--------------------
-vday        | 2015-06-29 00:00:00
-vprofit_sum | 1064416
+vday        | 2022-08-04 00:00:00
+vprofit_sum | 180344
 stat        | 平仓
-pqid        | 1032131610
+pqid        | 1036343299
 qverid      | 1
 
 
 ```
 
----
-
-###  6.返回个股日线周期累计回报收益
-
-* **quant_return**
-
-> **说明:**
-    返回个股日线周期累计回报收益.
-    
-    - 参数: cficode 
-
-> 示例:
-```
-E2Q=> SELECT * from quant_return(179591) limit 5;
--[ RECORD 1 ]+--------------------
-rstock       | 600048
-pday         | 2014-06-04 00:00:00
-price        | 89.1838
-return_value | 0
--[ RECORD 2 ]+--------------------
-rstock       | 600048
-pday         | 2014-06-05 00:00:00
-price        | 86.9694
-return_value | -2.482962152319156
--[ RECORD 3 ]+--------------------
-rstock       | 600048
-pday         | 2014-06-06 00:00:00
-price        | 88.077
-return_value | -1.2410325642100994
--[ RECORD 4 ]+--------------------
-rstock       | 600048
-pday         | 2014-06-09 00:00:00
-price        | 88.235
-return_value | -1.0638703441656507
--[ RECORD 5 ]+--------------------
-rstock       | 600048
-pday         | 2014-06-10 00:00:00
-price        | 91.3986
-return_value | 2.483410664268619
-
-```
-
-###  7.个股及指数每天回报(%)
+###  12.个股及指数每天回报(%)
 
 * **quant_return_day**
 
@@ -664,7 +729,7 @@ return_value | 0.03585425284750952
 
 ---
 
-###  8.返回个股月回报
+###  13.返回个股月回报
 
 * **quant_return_fmonth**
 
@@ -706,7 +771,7 @@ return_value | -1.9021428671646807
 
 ---
 
-###  9.返回个股月累计回报
+###  14.返回个股月累计回报
 
 * **quant_return_month**
 
@@ -748,59 +813,67 @@ return_value | 9.755583413131086
 
 ---
 
-###  10.资金波动(%)/日
+###  15.返回个股日线周期累计回报收益
 
-* **quant_risk_profix**
+* **quant_return**
 
 > **说明:**
-    资金波动(%)/日.
+    返回个股日线周期累计回报收益.
     
-    - 参数: version_id 
+    - 参数: cficode 
 
 > 示例:
 ```
-E2Q=> SELECT * from quant_risk_profix(1) limit 2;
--[ RECORD 1 ]--+-----------------------
-rid            | 1
-rday           | 2014-09-02 00:00:00+08
-rcredit        | 1000000
-rpcredit_first | 0
-rpcredit_pre   | 0
--[ RECORD 2 ]--+-----------------------
-rid            | 2
-rday           | 2014-09-03 00:00:00+08
-rcredit        | 1000000
-rpcredit_first | 0
-rpcredit_pre   | 0
+E2Q=> SELECT * from quant_return(179591) limit 5;
+-[ RECORD 1 ]+--------------------
+rstock       | 600048
+pday         | 2014-06-04 00:00:00
+price        | 89.1838
+return_value | 0
+-[ RECORD 2 ]+--------------------
+rstock       | 600048
+pday         | 2014-06-05 00:00:00
+price        | 86.9694
+return_value | -2.482962152319156
+-[ RECORD 3 ]+--------------------
+rstock       | 600048
+pday         | 2014-06-06 00:00:00
+price        | 88.077
+return_value | -1.2410325642100994
+-[ RECORD 4 ]+--------------------
+rstock       | 600048
+pday         | 2014-06-09 00:00:00
+price        | 88.235
+return_value | -1.0638703441656507
+-[ RECORD 5 ]+--------------------
+rstock       | 600048
+pday         | 2014-06-10 00:00:00
+price        | 91.3986
+return_value | 2.483410664268619
 
 ```
+###  16.各个 QuantId 止赢止损平仓(数量)比
 
----
-
-###  11.资金波动(%)/月
-
-* **quant_risk_profix_month**
+* **quant_take_loss**
 
 > **说明:**
-    资金波动(%)/月.
+    各个 QuantId 止赢止损平仓(数量)比.
     
-    - 参数: version_id 
+    - 参数: verid 
 
 > 示例:
 ```
-E2Q=> SELECT * from quant_risk_profix_month(1) limit 2;
--[ RECORD 1 ]--+---------
-rid            | 1
-rday           | 2014-09
-rcredit        | 1000000
-rpcredit_first | 0
-rpcredit_pre   | 0
--[ RECORD 2 ]--+---------
-rid            | 11
-rday           | 2014-10
-rcredit        | 1007148
-rpcredit_first | 7148
-rpcredit_pre   | 0.007148
+E2Q=> SELECT * from quant_take_loss(1) limit 2;
+-[ RECORD 1 ]-------
+type    | 100
+stat    | 策略平仓
+quantid | 1036343281
+number  | 3
+-[ RECORD 2 ]-------
+type    | 100
+stat    | 策略平仓
+quantid | 1036343282
+number  | 7
 
 ```
 
