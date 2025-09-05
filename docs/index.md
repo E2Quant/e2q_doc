@@ -17,16 +17,20 @@
 ./e2q -e script.e2
                  Usage:
                  -h help
-                 -e which loading ea e2l script
-                 -s which loading oms e2l script
-                 -p which loading db properties
-                 -l show llvm ir for e2l
-                 -r e2l run number
-                 -o only test e2l script
-                 -v show e2q version
-                 -f log directory
-                 -i e2l import codes directory,def:/usr/local/include/e2/
+                 -a if oms default fix account number or if ea account index
+                 -b bin history ticket file directory
                  -d daemon run
+                 -e which loading ea e2l script
+                 -f log directory
+                 -l show llvm ir for e2l
+                 -n read number bin history tickets
+                 -i e2l import codes directory,def:/usr/local/include/e2/
+                 -s which loading oms e2l script
+                 -o only test e2l script
+                 -p which loading db properties
+                 -r e2l run number
+                 -v show e2q version
+
 ```
 > 引导入口的 script 是由 e2l 语言开发
 
@@ -40,3 +44,9 @@
 - 简单的语法
 - 安全及简单的使用多进程及多线程
 - 可生成字节码
+
+## 支持在多股票回测的时候，使用退市及上市新股票，流程图如下
+
+> 在新上市 cficode 中，可以支持读取过往的历史记录，历史记录文件，是 e2b 的订单文件，采用 E2Q Protocol 协议生成
+
+![toList and Delisting](./images/mutile_cfi_code_for_mutile_ea.png "E2Q")

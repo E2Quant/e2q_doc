@@ -2652,6 +2652,48 @@ FCustomDataGet(cfi_id, index, postion);
 
 ---
 
+* **FSymbolLockForEA**
+> 如果有多个 cficode 的时候， 可以限制一个进程(账号),单独获取其中一个 cficode
+
+> *函数原型*
+```
+FSymbolLockForEA();
+```
+> *说明*
+
+- 参数： 无.
+- 返回值: 无.
+
+> 示例:
+
+```
+    # 用在 oms 端
+    FSymbolLockForEA();
+```
+
+---
+
+* **FDelisting**
+>  获取 某个 cficode 的退市时间
+
+> *函数原型*
+```
+FDelisting(cfi_id);
+```
+> *说明*
+
+- 参数： cfi_id 数值.
+- 返回值: 数值.
+
+> 示例:
+
+```
+    cfi_code = 179594;
+    dtime = FDelisting(cfi_code);
+```
+
+---
+
 * **FCustomDataNumber**
 > 获取自定义数据的更新的次数
 

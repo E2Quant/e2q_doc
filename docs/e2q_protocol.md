@@ -9,14 +9,15 @@
 
 * 格式
 
-| Name         | Offset | Length | Value   | Notes            |
-| :------------- | -------- | -------- | --------- | --------------------------------------------------------------------------------------- |
-| Message Type | 0      | 1      | 'I'     | Init Type                        |
-| stock        | 1      | 10      | Alpha   | 股票名称                         |
+| Name         | Offset | Length | Value   | Notes                          |
+| :----------- | ------ | ------ | ------- | ---------------  |
+| Message Type | 0      | 1      | 'I'     | Init Type                       |
+| stock        | 1      | 10     | Alpha   | 股票名称                         |
 | cficode      | 11     | 4      | Integer | cfi code                            |
-| type         | 15     | 1      | Alpha | symbol type ['i':index, 't':trade]     |
-| TickTime     | 16      | 4      | Integer | 每一笔报价的间隔时间, 回测的时候使用的, <br/>免得策略超过这个报价的间隔时间就有点麻烦了 |
-| Aligned      | 20      | 1      | Alpha |  当前的状态 ['U': 后面还有数据, <br/>'P': 当前一个时间对齐完成]|
+| type         | 15     | 1      | Alpha   | symbol type ['i':index, 't':trade]     |
+| TickTime     | 16     | 4      | Integer | 每一笔报价的间隔时间, 回测的时候使用的, <br/>免得策略超过这个报价的间隔时间就有点麻烦了 |
+| unix_time    | 20     | 8      | Inte 64 | 默认为上市时间                                |
+| Aligned      | 28     | 1      | Alpha   |  当前的状态 ['U': 后面还有数据, <br/>'P': 当前一个时间对齐完成]|
 
 * C++ 类
 ```
@@ -58,6 +59,23 @@ typedef struct SystemInitMessage SystemInitMessage;
 | Name         | Offset | Length | Value   | Notes                                   |
 | :------------- | -------- | -------- | --------- | ------------------------------------------ |
 | Message Type | 0      | 1      | 'S'     | suspend order                                |
+
+* C++ 类
+
+```
+
+```
+
+###  MARKET  交易市场
+
+* 格式
+
+| Name         | Offset | Length | Value   | Notes                                   |
+| :------------- | -------- | -------- | --------- | ------------------------------------------ |
+| Message Type   | 0        | 1        | 'M'       | market                               |
+| Action         | 1        | 1        | 'L' or 'D'  | 'L' to list(Going Public), 'D' is Delisting  |
+| cficode        | 2        | 4        |   Integer       |  cfi code  |
+| unix_time    | 20      | 8      |   Integer 64    | 上市或退市时间                                |
 
 * C++ 类
 
@@ -492,5 +510,103 @@ func ABook() {
 }
 #----- func end
 
+
+```
+
+## E2Q Protocol 生成历史记录文件 (e2b)
+### Python 案例
+
+```python
+
+    def BuildE2B(self, stock, symId, df_price, frame):
+        '''
+        生成 e2b
+        '''
+        if not os.path.isdir(self._e2b_dir):
+            os.makedirs(self._e2b_dir)
+
+        path_name = self._e2b_dir + stock + "_" + str(symId) + ".e2b"
+        mtickm = MarketTickMessage()
+        columns = ["open", "low", "high", "close", "volume"]
+        number = 0
+        for index, index_row in df_price.iterrows():
+            unix_time = self.__unixtime(index.value)
+            index_bar = index_row[columns].values
+            for idx in range(4):
+                qty = index_bar[-1]
+                price = index_bar[idx]
+
+                mtickm.UinxTime(unix_time)
+                mtickm.Stock(frame, qty, price, number, symId)
+                bin_data = mtickm.toString()
+
+                with open(path_name, "ab+") as bin_files:
+                    bin_files.write(bin_data)
+
+            number += 1
+
+    def __parse(self, bdata):
+        '''
+            解释二进制数据
+        '''
+        data = {}
+
+        idx = 0
+        _MsgType = struct.unpack_from('!c', bdata, idx)
+        idx += 1
+        data['msgtype'] = _MsgType[0]
+
+        _CfiCode = struct.unpack_from('!I', bdata, idx)
+        _CfiCode = _CfiCode[0]
+        data['cficode'] = _CfiCode
+        idx += 4
+
+        _ticket_now = struct.unpack_from('!Q', bdata, idx)
+        _ticket_now = _ticket_now[0]
+        idx += 8
+        data['ticket_now'] = _ticket_now
+
+        _frame = struct.unpack_from('!H', bdata, idx)
+        _frame = _frame[0]
+        data['frame'] = _frame
+        idx += 2
+
+        _side = struct.unpack_from('!c', bdata, idx)
+        data['side'] = _side[0]
+        idx += 1
+
+        price_64 = struct.unpack_from('!6s', bdata, idx)
+        b64 = b'\x00\x00' + price_64[0]
+        price = struct.unpack_from('!Q', b64)
+        data['price'] = price[0]
+        idx += 6
+
+        qty_64 = struct.unpack_from('!6s', bdata, idx)
+        b64 = b'\x00\x00' + qty_64[0]
+        qty = struct.unpack_from('!Q', b64)
+        data['qty'] = qty[0]
+        idx += 6
+
+        _number = struct.unpack_from('!I', bdata, idx)
+        _number = _number[0]
+        data['number'] = _number
+        idx += 4
+
+        logger.info(data)
+
+    def ReadE2B(self, stock, symId):
+        path_name = self._e2b_dir + stock + "_" + str(symId) + ".e2b"
+        tick_len = 33
+        next_seek = tick_len
+
+        with open(path_name, "rb") as bin_files:
+            while True:
+                data = bin_files.read(tick_len)
+                if len(data) == 0:
+                    break
+                bin_files.seek(next_seek)
+
+                self.__parse(data)
+                next_seek += tick_len
 
 ```
