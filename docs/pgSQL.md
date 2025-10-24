@@ -879,6 +879,87 @@ number  | 7
 
 ---
 
+## 多股票风险 部分说明
+
+###  1.每日累计收益回报情况(%)
+
+* **risk_credit_for_day**
+
+> **说明:**
+    每日累计收益回报情况(%).
+    
+    - 参数: verid 
+
+> 示例:
+```
+E2Q=> select * from risk_returns_for_day(1) limit 3;
+-[ RECORD 1 ]-----------------------
+tdays       | 2020-06-15 00:00:00+08
+credits     | 3000000
+returns_day | 0
+-[ RECORD 2 ]-----------------------
+tdays       | 2020-06-16 00:00:00+08
+credits     | 3013736
+returns_day | 0.45786666666666664
+-[ RECORD 3 ]-----------------------
+tdays       | 2020-06-17 00:00:00+08
+credits     | 3013736
+returns_day | 0.45786666666666664
+```
+
+###  2.每月累计收益回报情况(%)
+
+* **risk_returns_for_month**
+
+> **说明:**
+    每月累计收益回报情况(%).
+    
+    - 参数: verid 
+
+> 示例:
+```
+E2Q=> select * from risk_returns_for_month(1) limit 3;
+-[ RECORD 1 ]-+---------------------
+tdays         | 2020-06
+credits       | 3000000
+returns_month | 0
+-[ RECORD 2 ]-+---------------------
+tdays         | 2020-07
+credits       | 2991908
+returns_month | -0.2697333333333333
+-[ RECORD 3 ]-+---------------------
+tdays         | 2020-08
+credits       | 2995067
+returns_month | -0.16443333333333335
+```
+
+
+###  3.资金变动概要(日)
+
+* **risk_credit_for_day**
+
+> **说明:**
+    资金变动概要(日).
+    
+    - 参数: verid 
+
+> 示例:
+```
+E2Q=> select * from risk_credit_for_day(1) limit 3;
+-[ RECORD 1 ]-------------------
+tday    | 2020-06-15 00:00:00+08
+credits | 3000000
+-[ RECORD 2 ]-------------------
+tday    | 2020-06-16 00:00:00+08
+credits | 3013736
+-[ RECORD 3 ]-------------------
+tday    | 2020-06-17 00:00:00+08
+credits | 3013736
+
+```
+
+---
+
 ## 数据可以采用 BI 分析
 
 ### metabase 数据分析

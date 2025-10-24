@@ -2694,6 +2694,28 @@ FDelisting(cfi_id);
 
 ---
 
+* **FIsSuspended**
+>  暂停交易, 作用在整体
+
+> *函数原型*
+```
+FIsSuspended();
+```
+> *说明*
+
+- 参数： 无 .
+- 返回值: 返回 UBool 结构体.
+
+> 示例:
+
+```
+    ## 暂定交易 
+    is_suspend = FIsSuspended();
+
+```
+
+---
+
 * **FCustomDataNumber**
 > 获取自定义数据的更新的次数
 
