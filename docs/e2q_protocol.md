@@ -97,10 +97,11 @@ typedef struct SystemInitMessage SystemInitMessage;
 | category     | 11     | 2      | Integer |  category  |
 | fenhong      | 13     | 4      | Integer |  fenhong  |
 | songzhuangu  | 17     | 4      | Integer |  songzhuangu  |
-| outstanding  | 21     | 4      | Integer |  outstanding  |
-| outstandend  | 25     | 4      | Integer |  outstandend  |
-| mrketCaping  | 29     | 4      | Integer |  mrketCaping  |
-| Aligned      | 33     | 1      | Alpha   |  当前的状态 ['U': 后面还有数据,<br/> 'P': 当前一个时间对齐完成]|
+| split        | 21     | 4      | Integer | split      |
+| outstanding  | 25     | 4      | Integer | outstanding|
+| outstandend  | 26     | 4      | Integer | outstandend|
+| mrketCaping  | 33     | 4      | Integer | mrketCaping|
+| Aligned      | 37     | 1      | Alpha   |  当前的状态 ['U': 后面还有数据,<br/> 'P': 当前一个时间对齐完成]|
 
 * C++ 类
 

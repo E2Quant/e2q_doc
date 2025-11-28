@@ -1351,6 +1351,7 @@ FExDividendCash( cfi_code, idx );
 
 ```
 ```
+
 ---
 
 * **FExDividendShare**
@@ -2601,6 +2602,27 @@ FExdiShare(cfi_id);
 ```
    
 ```
+
+---
+
+* **FExdiSplit**
+> 获取 ETF 拆分数
+
+> *函数原型*
+```
+FExdiSplit(cfi_id);
+```
+> *说明*
+
+- 参数： cfi_id 数值.
+- 返回值: 数值.
+
+> 示例:
+
+```
+   
+```
+
 
 ---
 
