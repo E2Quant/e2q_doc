@@ -1,5 +1,9 @@
 # E2L 语言
 
+运行思维图
+
+![E2L mind map](images/tickrune2l.png "E2L")
+
 ## 变量类型
 
 - 整数
