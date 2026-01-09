@@ -1,18 +1,16 @@
-func atan2(val){
-    print(val);
-    
-    # ttest function 
-    # okdf
-    print(22)
-} 
- 
+#--------
+# Name:function
+#   Parameters:
+# - arg1: xxx
+# - arg2: xxx
+# -> return 
+# Description: 
+#  
+#--------	
+func main() {
+    hello = 1;
+    return hello;
+}
+#----- func end
 
-union order  {  union executed  { dd=d() ;price = open - close;  }val = atan2(5); }
-  union executed  {
-        #
-        # test
-        #
-        price = open - close;
-        val = atan2(5);
-    } 
-
+ret = main();

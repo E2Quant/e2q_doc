@@ -1,0 +1,73 @@
+#--------
+# Name: union
+# Description: 
+#  union 结构定义全局变量 
+#--------	
+union my_union {
+    static = 1;	
+}
+#----- union end
+
+
+## namespace 命名空间
+namespace myns {
+
+## 命名空间 myns 的私有变量
+    this::var = 1;
+    this::two = 2;
+
+    func myns(n) {
+        if(n>5){
+            # 私有变量的运算
+            this::var = n;
+        }
+        # 全局变量 的运算
+        this::two = n + my_union.static;
+    }
+    	
+    func set( x ) {
+## 调用 myns 的myns 函数
+        this::myns(x); 
+
+        this::two = x;
+    }
+    func get() { 
+        ret = this::var +  3 + this::two ;
+        return  ret;       
+    }       
+}
+
+namespace myt{
+    this::a = 9;
+ 
+    func init(x) {
+        this::a = x;
+    }
+    func get(u){
+
+        return this::a;
+    }
+}
+
+func main() {
+    okv = 2;
+  #  myns<a>::myns(okv);    
+    myns<a>::set(okv);
+    ret = myns<a>::get();
+    echo(ret); 
+
+    dd=5;
+    myns<e>::set(dd);
+    next = myns<e>::get();
+    echo(next);
+
+    tret = myt<e>::get(dd);
+    echo(tret);
+
+    return ret;
+}
+#----- func end
+
+ret=main();
+
+

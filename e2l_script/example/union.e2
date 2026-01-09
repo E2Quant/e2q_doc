@@ -1,6 +1,26 @@
 union myun{
     t=6;
-}
-a= myun.t + 1;
+    #--------
+    # Name: union
+    # Description: 
+    #  
+    #--------	
+    union next {
+     arg=1;	
+    }
+    #----- union end
 
+    #--------
+    # Name: union
+    # Description: 
+    #  
+    #--------	
+    union tow {
+     arg5=1;	
+    }
+    #----- union end
+}
+a= myun.t + 1 + myun.tow.arg5;
+echo(a);
+#myun.t = 9;
 

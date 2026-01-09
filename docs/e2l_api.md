@@ -329,6 +329,48 @@ FDefTFrame();
 
 ---
 
+* **FTFrameLength**
+> 返回当前一共设置了多少个周期
+
+> *函数原型*
+```
+FTFrameLength();
+```
+> *说明*
+
+- 参数：无.
+- 返回值: 返回数值.
+
+> 示例:
+
+```
+    size = FTFrameLength();
+```
+
+---
+
+* **FGetTFrame**
+> 返回索引中的某一个周期值
+
+> *函数原型*
+```
+FGetTFrame();
+```
+> *说明*
+
+- 参数：数值.
+- 返回值: 返回 UTimeFrames 结构体.
+
+> 示例:
+
+```
+    size = FTFrameLength();
+    idx = size - 1;
+    tf = FGetTFrame(idx);
+```
+
+---
+
 * **FIndex**
 > 报价是不是以 index 为准.
 

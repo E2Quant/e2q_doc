@@ -1,0 +1,65 @@
+#--------
+# Name: union
+# Description: 
+#  
+#--------	
+union Iuns {
+    id = 2;	
+}
+#----- union end
+
+
+func update(key) {
+    ret = key * 3;
+    return ret;
+}
+#----- func end
+
+namespace myns {
+    this::var = 10;
+    	
+    self func change(arg) {
+        this::var = arg + this::var;
+        this::var = this::var * Innx.id;
+    }
+    
+    func set(arg) {
+        this::var = this::change(arg); 
+        this::var = update(this::var);
+    }
+   	
+    func get() { 
+        return this::var;    
+    }
+}
+
+func run() {
+    ok_value = 9;
+    # tag is "tag"
+    myns<tag>::set(ok_value);
+    
+    two_value = 8;
+    # tag is "two"
+    myns<two>::set(two_value);   
+ 
+    ok_ret = myns<tag>::get();
+    echo(ok_ret);    
+
+    two_ret = myns<two>::get();
+    echo(ok_ret);
+
+    # default empty tag
+    def_ret = myns<>::get();
+    echo(def_ret);
+
+    # tag use number
+    number_ret = myns<1>::get();
+    echo(number_ret);
+}
+
+func main() {
+    run();
+}
+
+
+main();
