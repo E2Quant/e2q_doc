@@ -678,6 +678,7 @@ FLotAndShare(lot);
     lot = 1;
     FLotAndShare(lot);
 ```
+
 ---
 
 * **FCurrentLS**
@@ -732,6 +733,51 @@ union UOMSRisk{
         echo(me);
     }
 ```
+
+---
+
+* **FConfigShow**
+> 打印当前的配置信息
+
+> *函数原型*
+```
+FConfigShow();
+```
+> *说明*
+
+- 参数： 无.
+- 返回值: 无.
+
+> 示例:
+
+```
+    FConfigShow();
+```
+
+``` text
+
++---------------------------------------------------+
+|name           |value                              |
++---------------------------------------------------+
+|fix cfg        |/opt/e2q/cfg/executor.cfg          |
+|kafka          |kafkaserver:9092                   |
+|csv_kafka      |1                                  |
+|topic          |fix-events                         |
+|trade time     |09:30 - 11:30                      |
+|ccy            |rmb                                |
+|commission     |0                                  |
+|trade mode     |1                                  |
+|lot and share  |100.00000                          |
+|Settlement     |1                                  |
+|SettlInst      |2                                  |
+|MatchEventInit |0                                  |
+|BrokerBook     |1                                  |
+|SymbolOnlyForEA|1                                  |
+|version        |1.3.3                              |
++---------------------------------------------------+
+```
+
+---
 
 ## 交易函数
 

@@ -12,6 +12,7 @@
 - Body 类
     - "namespace" {命名空间}
     - "this" {namespace 调用}
+    - "self" {namespace 定义私有函数}
     - "union" { 结构体 }
     - "func"  { 函数体 }
     - "import" { 引入代码 }
@@ -170,7 +171,7 @@ echo(10);
 - 命名空间关键词  名称 { 成员说明 }	
     - 成员说明 
         - this::[变量名称] = [值]
-        - function [函数] { 函数内容 }
+        - (self) function [函数] { 函数内容 }
 - 内部调用
     - 函数及变量都在名称前加上 {this::}
 - 外部调用

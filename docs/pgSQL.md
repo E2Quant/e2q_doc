@@ -370,6 +370,51 @@ argv       | 20/52
 
 ---
 
+###  11.各个版本的收益统计
+
+* **e2q_risk_profit_count**
+
+> **说明:**
+    各个版本的收益统计.
+
+> 示例:
+```
+E2Q=> select * from e2q_risk_profit_count limit 2;
+-[ RECORD 1 ]-------+--
+profit<=-20.0       | 0
+-20.0<profit<=-10.0 | 0
+-10.0<profit<=-5.0  | 3
+-5.0<profit<=0      | 2
+0<profit<=5.0       | 1
+5.0<profit<=10.0    | 2
+10.0<profit<=30.0   | 0
+30.0<profit<=80.0   | 0
+80.0<profit         | 0
+```
+
+---
+
+###  11.各个版本的收益列表
+
+* **e2q_risk_profie2q_risk_profit_count_listt_count**
+
+> **说明:**
+    各个版本的收益列表.
+
+> 示例:
+```
+E2Q=>  select * from e2q_risk_profit_count_list limit 2;
+-[ RECORD 1 ]---------------
+credits | 922101.3
+profit  | -7.789869999999996
+verid   | 4
+-[ RECORD 2 ]---------------
+credits | 943889.2
+profit  | -5.611080000000005
+verid   | 2
+```
+---
+
 ## function 部分说明
 
 ---

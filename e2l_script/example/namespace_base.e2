@@ -7,8 +7,8 @@ union my_union {
     static = 1;	
 }
 #----- union end
-
-
+#
+#
 ## namespace 命名空间
 namespace myns {
 
@@ -40,11 +40,13 @@ namespace myns {
 namespace myt{
     this::a = 9;
  
-    func init(x) {
-        this::a = x;
+   self func init(x) {
+        this::a = x + my_union.static ;
     }
-    func get(u){
-
+    func get(x){
+        if(x < this::a){
+            this::init(x);
+        }
         return this::a;
     }
 }
@@ -52,18 +54,23 @@ namespace myt{
 func main() {
     okv = 2;
   #  myns<a>::myns(okv);    
-    myns<a>::set(okv);
-    ret = myns<a>::get();
-    echo(ret); 
-
+#    myns<a>::set(okv);
+#    ret = myns<a>::get();
+#    echo(ret); 
+#
     dd=5;
-    myns<e>::set(dd);
-    next = myns<e>::get();
-    echo(next);
+#    myns<e>::set(dd);
+#    next = myns<e>::get();
+#    echo(next);
 
-    tret = myt<e>::get(dd);
-    echo(tret);
 
+   # myt<e>::init(dd);
+    ret = myt<e>::get(dd);
+    echo(ret);
+
+    dd = 18;
+    ret = myt<ee>::get(dd);
+    echo(ret);
     return ret;
 }
 #----- func end
