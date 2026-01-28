@@ -47,6 +47,7 @@ namespace myt{
         if(x < this::a){
             this::init(x);
         }
+        last(x);
         return this::a;
     }
 }
@@ -66,11 +67,13 @@ func main() {
 
    # myt<e>::init(dd);
     ret = myt<e>::get(dd);
-    echo(ret);
+  #  echo(ret);
 
     dd = 18;
     ret = myt<ee>::get(dd);
-    echo(ret);
+   # echo(ret);
+
+
     return ret;
 }
 #----- func end

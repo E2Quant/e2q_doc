@@ -4,6 +4,9 @@
 
 ![E2L mind map](images/tickrune2l.png "E2L")
 
+## 可生成 Graph 索引图
+
+![E2L dot map](images/dot.png "E2L")
 
 ## E2L 关键词
 
