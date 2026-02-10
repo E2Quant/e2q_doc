@@ -1359,6 +1359,26 @@ union UMatchEvent {
 
 ---
 
+* **FMatchTrigger**
+> 设置 撮合 条件
+
+> *函数原型*
+```
+FMatchTrigger( bool );
+```
+> *说明*
+
+- 参数： bool 是 e2::Bool 结构体
+- 返回值: 无.
+
+> 示例:
+
+```    
+   FMatchTrigger(UBool.B_TRUE); 
+```
+
+---
+
 * **FExDivPrice**
 > 查询 复权数据
 

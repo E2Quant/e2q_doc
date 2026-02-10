@@ -138,7 +138,8 @@ typedef struct StockAXdxrMessage StockAXdxrMessage;
 | price        | 16     | 6      |   Integer 64    | price           |
 | qty          | 22     | 6      |   Integer 64    | qty           |
 | number       | 28     | 6      |   Integer 32   | number           |
-| Aligned      | 34     | 1      | Alpha |  当前的状态 ['U': 后面还有数据,<br/> 'P': 当前一个时间对齐完成]|
+| match        | 34     | 1      |   Alpha   | 'n','y' 当前一笔报价是否可作为撮合价格           |
+| Aligned      | 35     | 1      | Alpha |  当前的状态 ['U': 后面还有数据,<br/> 'P': 当前一个时间对齐完成]|
 
 * C++ 类
 
@@ -156,6 +157,140 @@ struct MarketTickMessage : public BaseMessage {
 
 typedef struct MarketTickMessage MarketTickMessage;
 
+```
+
+### 独立撮合价
+
+* 格式
+
+| Name         | Offset | Length | Value     | Notes       |
+| :----------- | ------ | ------ | --------- | --------- |
+| Message Type | 0      | 1      | 'D'       | Deal      |
+| stock        | 1      | 10     | Alpha     | 股票名称      |
+| side         | 11     | 1      | Alpha     | 'B', 'S'  |
+| dprice       | 12     | 6      | Integer64 | 成交均价     |
+| dqty         | 18     | 6      | Integer64 | qty       |
+| commission   | 24     | 6      | Integer64 | commission       |
+| tamount      | 30     | 6      | Integer64 | 成交额   |
+| tdate        | 36     | 6      | Integer32 | trade date       |
+| ttime        | 42     | 6      | Integer32 | trade time       |
+| unix_time    | 48     | 8      | Integer64 | unix_time |
+| ticket       | 54     | 8      | Integer64 | 当前一笔的ticket      |
+| unique_size  | 62     | 6      | Integer16 | size   |
+| unique_id    | 68     | 256    | Alpha     | unique value   |
+| Aligned      | 324    | 1      | Alpha     | Aligned_t |
+
+
+* python
+
+```python
+class BaseMessage:
+    '''
+    整数的精度
+    '''
+    number_deci = 10000.0
+
+class MsgType:
+    INIT = b'I'
+    XDXR = b'X'
+    SUSPEND = b'S'
+    TICK = b'T'
+    CUSTOM = b'C'
+    MARKETING = b'M'
+    EXIT = b'E'
+    LOG = b'L'
+    DEAL = b'D'
+
+
+class Aligned:
+    # 进行中
+    UNDER = b'U'
+    # 完成
+    PULL = b'P'
+
+class DealMatchMessage(BaseMessage):
+    """"""
+
+    def __init__(self):
+        """Constructor for """
+        self._mt = MsgType()
+        self._al = Aligned()
+
+        # 转成整数
+        self._number_deci = BaseMessage.number_deci
+
+        self.msgtype = self._mt.DEAL
+        self._stock = ""
+        self._side = b''
+        self._dprice = 0
+        self._dqty = 0
+        self._commision = 0
+        self._tamount = 0
+        self._tdate = 0
+        self._ttime = 0
+        self._unix_time = int(time.time())
+        self._ticket = 0
+        self._unique_size = 0
+        self._unique_id = ""
+
+        self.anligned = self._al.UNDER
+
+    def Stock(self, symbol):
+
+        if not isinstance(symbol, bytearray):
+            self._stock = symbol.encode('utf-8')
+        else:
+            self._stock = symbol
+
+    def data(self, side, price, qty, commision, amount, tdate, ttime, unix_time,
+             ticket, unique):
+        self._side = side
+        self._dprice = int(price * self._number_deci)
+        self._dqty = qty
+        self._commision = commision
+        self._tamount = amount
+        self._tdate = tdate
+        self._ttime = ttime
+        self._unix_time = unix_time
+        self._ticket = ticket
+        self._unique_size = len(unique)
+        self._unique_id = unique
+
+        if not isinstance(unique, bytearray):
+            self._unique_id = unique.encode('utf-8')
+        else:
+            self._unique_id = unique
+
+    def toString(self):
+        """
+
+        """
+        uinx_time_64 = struct.pack("!Q", self._unix_time)
+        tick_64 = struct.pack("!Q", self._ticket)
+
+        price_64 = struct.pack("!Q", int(self._dprice))
+        price_64 = price_64[2:]
+
+        qty_64 = struct.pack("!Q", int(self._dqty))
+        qty_64 = qty_64[2:]
+
+        commi_64 = struct.pack("!Q", int(self._commision * self._number_deci))
+        commi_64 = commi_64[2:]
+
+        amount_64 = struct.pack("!Q", int(self._tamount * self._number_deci))
+        amount_64 = amount_64[2:]
+
+        fmt = '!c9sc6s6s6s6sII8s8sH' + str(self._unique_size) + 'sc'
+
+        data = struct.pack(fmt,
+                           self.msgtype, self._stock,
+                           self._side, price_64, qty_64, commi_64, amount_64,
+                           self._tdate, self._ttime,
+                           uinx_time_64, tick_64, self._unique_size,
+                           self._unique_id,
+                           self.anligned)
+
+        return data
 ```
 
 ### 自定义数据
