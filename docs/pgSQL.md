@@ -271,12 +271,12 @@ profit_pre | -0.025
 ```
 ---
 
-### 8.个股的风险仓位分布
+### 8. 个股的风险仓位分布
 
 * **e2q_risk_value**
 
 > **说明:**
-    个股的风险仓位分布
+    个股的风险仓位分布,(不再使用)
 
 > 示例:
 ```
@@ -394,9 +394,9 @@ profit<=-20.0       | 0
 
 ---
 
-###  11.各个版本的收益列表
+###  12.各个版本的收益列
 
-* **e2q_risk_profie2q_risk_profit_count_listt_count**
+* **e2q_risk_profit_count_list**
 
 > **说明:**
     各个版本的收益列表.
@@ -412,6 +412,103 @@ verid   | 4
 credits | 943889.2
 profit  | -5.611080000000005
 verid   | 2
+```
+---
+
+###  13.当前所有回测数据收益范围图表
+
+* **e2q_risk_profit_count_row**
+
+> **说明:**
+    当前所有回测数据收益范围图表.
+
+> 示例:
+```
+E2Q=> select * from e2q_risk_profit_count_row;
+-[ RECORD 1 ]--------------
+key   | profit<=-20.0
+value | 0
+-[ RECORD 2 ]--------------
+key   | -20.0<profit<=-10.0
+value | 0
+-[ RECORD 3 ]--------------
+key   | -10.0<profit<=-5.0
+value | 0
+-[ RECORD 4 ]--------------
+key   | -5.0<profit<=0
+value | 3
+-[ RECORD 5 ]--------------
+key   | 0<profit<=5.0
+value | 0
+-[ RECORD 6 ]--------------
+key   | 5.0<profit<=10.0
+value | 3
+-[ RECORD 7 ]--------------
+key   | 10.0<profit<=30.0
+value | 4
+-[ RECORD 8 ]--------------
+key   | 30.0<profit<=80.0
+value | 1
+-[ RECORD 9 ]--------------
+key   | 80.0<profit
+value | 0
+```
+---
+
+###  14.股票状态
+
+* **e2q_symbol_status**
+
+> **说明:**
+    股票状态.
+
+> 示例:
+```
+E2Q=> select * from e2q_symbol_status limit 5;
+-[ RECORD 1 ]---------------
+id     | 361
+stock  | 600875
+sday   | 2017-01-09 12:00:00
+status | 交易
+verid  | 6
+-[ RECORD 2 ]---------------
+id     | 482
+stock  | 600098
+sday   | 2018-05-03 12:00:00
+status | 退出
+verid  | 7
+-[ RECORD 3 ]---------------
+id     | 396
+stock  | 000060
+sday   | 2020-05-07 12:00:00
+status | 退出
+verid  | 6
+-[ RECORD 4 ]---------------
+id     | 684
+stock  | 000528
+sday   | 2023-09-04 12:00:00
+status | 退出
+verid  | 10
+-[ RECORD 5 ]---------------
+id     | 125
+stock  | 001979
+sday   | 2020-10-12 12:00:00
+status | 退出
+verid  | 3
+```
+---
+
+###  15.取委托的订单
+
+* **e2q_trade_detail**
+
+> **说明:**
+    取委托的订单.
+
+> 示例:
+```
+E2Q=> select * from e2q_trade_detail limit 5;
+(0 rows)
 ```
 ---
 
@@ -897,6 +994,9 @@ price        | 91.3986
 return_value | 2.483410664268619
 
 ```
+
+---
+
 ###  16.各个 QuantId 止赢止损平仓(数量)比
 
 * **quant_take_loss**
@@ -924,6 +1024,352 @@ number  | 7
 
 ---
 
+###  17.基本指标-adxvma
+
+* **indicator_adxvma**
+
+> **说明:**
+    基本指标-adxvma.
+    
+    - 参数: verid 
+
+> 示例:
+```
+E2Q=> SELECT * from indicator_adxvma(1) limit 2;
+-[ RECORD 1 ]-------
+type    | 100
+stat    | 策略平仓
+quantid | 1036343281
+number  | 3
+-[ RECORD 2 ]-------
+type    | 100
+stat    | 策略平仓
+quantid | 1036343282
+number  | 7
+
+```
+
+---
+
+###  18.基本指标-report log
+
+* **indicator_report_log **
+
+> **说明:**
+    基本指标-adxvma.
+    
+    - 参数: verid 
+    - 参数: 类型ID
+
+> 示例:
+```
+E2Q=> SELECT * from indicator_report_log (1, 60) limit 2;
+-[ RECORD 1 ]-------
+type    | 100
+stat    | 策略平仓
+quantid | 1036343281
+number  | 3
+-[ RECORD 2 ]-------
+type    | 100
+stat    | 策略平仓
+quantid | 1036343282
+number  | 7
+
+```
+
+---
+###  19.基本指标-SharpeRatio
+
+* **indicator_sharpe_ratio **
+
+> **说明:**
+    基本指标-adxvma.
+    
+    - 参数: verid 
+    
+> 示例:
+```
+E2Q=> SELECT * from indicator_sharpe_ratio (1) limit 2;
+(0 rows)
+
+
+```
+
+---
+
+###  20.各种时长的综合收益比(%)
+
+* **quant_order_day_sum **
+
+> **说明:**
+    各种时长的综合收益比(%).
+    
+    - 参数: verid 
+    
+> 示例:
+```
+E2Q=>  SELECT * from quant_order_day_count (1) ;
+       profits       | time_long
+---------------------+-----------
+ -1.2371564278554426 | 1-5
+   2.587309727542426 | 20-90
+  -2.925019796170004 | 5-20
+   4.994651350376545 | 90
+(4 rows)
+
+```
+
+---
+
+###  21.资金波动(%)/日
+
+* **quant_order_day_sum **
+
+> **说明:**
+    资金波动(%)/日.
+    
+    - 参数: verid 
+    
+> 示例:
+```
+E2Q=> select * from quant_risk_profix(1) limit 2;
+ rid |  rquantid  |          rday          | rcredit | rpcredit_first | rpcredit_pre
+-----+------------+------------------------+---------+----------------+--------------
+   1 | 1055023176 | 2021-05-12 00:00:00+08 | 1000000 |              0 |            0
+   3 | 1055023180 | 2021-05-12 00:00:00+08 | 1000000 |              0 |            0
+(2 rows)
+
+```
+
+---
+
+###  21.资金波动(%)/月
+
+* **quant_risk_profix_month **
+
+> **说明:**
+    资金波动(%)/月.
+    
+    - 参数: verid 
+    
+> 示例:
+```
+E2Q=> select * from quant_risk_profix_month(1) limit 2;
+ rid |  rquantid  |  rday   | rcredit | rpcredit_first |    rpcredit_pre
+-----+------------+---------+---------+----------------+---------------------
+   1 | 1055023176 | 2021-05 | 1000000 |              0 |                   0
+  33 | 1055023160 | 2021-06 | 1002528 |           2528 | 0.25279999999999997
+(2 rows)
+
+```
+
+---
+
+###  22.资金波动(%)/月
+
+* **quant_risk_profix_month **
+
+> **说明:**
+    资金波动(%)/月.
+    
+    - 参数: verid 
+    
+> 示例:
+```
+E2Q=> select * from quant_risk_profix_month(1) limit 2;
+ rid |  rquantid  |  rday   | rcredit | rpcredit_first |    rpcredit_pre
+-----+------------+---------+---------+----------------+---------------------
+   1 | 1055023176 | 2021-05 | 1000000 |              0 |                   0
+  33 | 1055023160 | 2021-06 | 1002528 |           2528 | 0.25279999999999997
+(2 rows)
+
+```
+
+---
+
+###  23.账号每天余额
+
+* **risk_balance_for_day **
+
+> **说明:**
+    账号每天余额.
+    
+    - 参数: verid 
+    - 参数: _init_cash 初始化的金额
+    
+> 示例:
+```
+E2Q=> select * from risk_balance_for_day(1,10000000) limit 3;
+          tday          | balances
+------------------------+----------
+ 2021-05-12 00:00:00+08 | 41645046
+ 2021-05-13 00:00:00+08 | 23197601
+ 2021-05-14 00:00:00+08 | 13747785
+(3 rows)
+```
+
+---
+
+###  24.账号余额
+
+* **risk_balance_for_total **
+
+> **说明:**
+    账号余额.
+    
+    - 参数: verid 
+    - 参数: _init_cash 初始化的金额
+
+> 关联: risk_balance_for_total_loop
+    
+> 示例:
+```
+
+```
+
+---
+
+###  25.账号每天信用
+
+* **risk_credit_for_day **
+
+> **说明:**
+    账号每天信用.
+    
+    - 参数: verid 
+    - 参数: _init_cash 初始化的金额
+    
+> 示例:
+```
+E2Q=> select * from risk_credit_for_day(1,10000000) limit 5;
+          tday          |  credits
+------------------------+------------
+ 2024-07-29 00:00:00+08 | 7436564.85
+ 2024-07-24 00:00:00+08 | 7425219.85
+ 2024-07-23 00:00:00+08 | 7419234.05
+ 2024-07-12 00:00:00+08 | 7525032.05
+ 2024-07-11 00:00:00+08 | 7525035.05
+(5 rows)
+
+```
+
+---
+
+###  26.账号信用
+
+* **risk_credit_for_total **
+
+> **说明:**
+    账号信用.
+    
+    - 参数: verid 
+    - 参数: _init_cash 初始化的金额
+
+> 关联: risk_credit_for_total_loop
+    
+> 示例:
+```
+
+```
+
+---
+
+###  27.账号每天投入金
+
+* **risk_credit_for_day **
+
+> **说明:**
+    账号每天投入金.
+    
+    - 参数: verid 
+    - 参数: _init_cash 初始化的金额
+    
+> 示例:
+```
+E2Q=> select * from risk_margin_for_day(1,10000000) limit 5;
+          tday          | margins
+------------------------+----------
+ 2021-05-12 00:00:00+08 | 41354954
+ 2021-05-13 00:00:00+08 | 21798092
+ 2021-05-14 00:00:00+08 | 12247908
+ 2021-05-20 00:00:00+08 | 11349142
+ 2021-05-21 00:00:00+08 | 11820306
+(5 rows)
+```
+
+---
+
+###  28.账号投入金
+
+* **risk_margin_for_total **
+
+> **说明:**
+    账号投入金.
+    
+    - 参数: verid 
+    - 参数: _init_cash 初始化的金额
+
+> 关联: risk_margin_for_total_loop
+    
+> 示例:
+```
+
+```
+
+---
+
+###  29.订单收益回报(%)
+
+* **risk_returns_for_day **
+
+> **说明:**
+    订单收益回报.
+    
+    - 参数: verid 
+    - 参数: _init_cash 初始化的金额
+    
+> 示例:
+```
+E2Q=> select * from risk_returns_for_day(1,10000000) limit 5;
+         tdays          | credits  |     returns_day
+------------------------+----------+---------------------
+ 2021-05-12 00:00:00+08 | 43000000 |                   0
+ 2021-05-13 00:00:00+08 | 24995693 |  -41.87048139534883
+ 2021-05-14 00:00:00+08 | 15995693 | -62.800713953488376
+ 2021-05-20 00:00:00+08 | 16034749 | -62.709886046511635
+ 2021-05-21 00:00:00+08 | 16034746 | -62.709893023255816
+(5 rows)
+
+```
+
+---
+
+
+###  30.订单收益回报(%)/月
+
+* **risk_returns_for_month **
+
+> **说明:**
+    订单收益回报(%)/月.
+    
+    - 参数: verid 
+    - 参数: _init_cash 初始化的金额
+    
+> 示例:
+```
+E2Q=> select * from risk_returns_for_month(1,10000000) limit 5;
+  tdays  |   credits   |   returns_month
+---------+-------------+--------------------
+ 2021-05 |    43000000 |                  0
+ 2021-06 |    16023293 | -62.73652790697675
+ 2021-07 | 16055731.23 |  -62.6610901627907
+ 2021-08 |  7096224.67 | -83.49715193023255
+ 2021-09 |  7062237.67 | -83.57619146511628
+(5 rows)
+```
+
+---
+
 ## 多股票风险 部分说明
 
 ###  1.每日累计收益回报情况(%)
@@ -937,7 +1383,7 @@ number  | 7
 
 > 示例:
 ```
-E2Q=> select * from risk_returns_for_day(1) limit 3;
+E2Q=> select * from risk_returns_for_day(1,1000000) limit 3;
 -[ RECORD 1 ]-----------------------
 tdays       | 2020-06-15 00:00:00+08
 credits     | 3000000
@@ -963,7 +1409,7 @@ returns_day | 0.45786666666666664
 
 > 示例:
 ```
-E2Q=> select * from risk_returns_for_month(1) limit 3;
+E2Q=> select * from risk_returns_for_month(1,1000000) limit 3;
 -[ RECORD 1 ]-+---------------------
 tdays         | 2020-06
 credits       | 3000000
@@ -990,7 +1436,7 @@ returns_month | -0.16443333333333335
 
 > 示例:
 ```
-E2Q=> select * from risk_credit_for_day(1) limit 3;
+E2Q=> select * from risk_credit_for_day(1,1000000) limit 3;
 -[ RECORD 1 ]-------------------
 tday    | 2020-06-15 00:00:00+08
 credits | 3000000

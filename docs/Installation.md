@@ -34,8 +34,10 @@ apt install build-essential cmake clang clangd clang-format \
 > llvm 可能要作以下连接
 
 ``` 
-ln -s /usr/include/llvm-14/llvm/ /usr/include/llvm 
-ln -s /usr/include/llvm-c-14/llvm-c/ /usr/include/llvm-c
+export llvm_ver=`clang --version  | grep "clang version" | cut -d" " -f4 | cut -d"." -f1`
+
+ln -s /usr/include/llvm-${llvm_ver}/llvm/ /usr/include/llvm 
+ln -s /usr/include/llvm-c-${llvm_ver}/llvm-c/ /usr/include/llvm-c
 ```
 
 > 开始安装
