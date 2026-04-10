@@ -1533,6 +1533,67 @@ union UBookType {
  FBrokerBook(UBookType.ABook);  
 ```
 
+---
+
+* **FTotalCash**
+> 返回所有账号的金额
+
+> *函数原型*
+```
+FTotalCash(  );
+```
+> *说明*
+
+- 参数： 无.
+- 返回值:  数值.
+
+> 示例:
+
+```
+
+```
+
+
+---
+
+* **FTotalMargin**
+> 返回所有账号当前冻结金额
+
+> *函数原型*
+```
+FTotalMargin(  );
+```
+> *说明*
+
+- 参数： 无.
+- 返回值:  数值.
+
+> 示例:
+
+```
+    margin = FTotalMargin();
+    cashs = FTotalCash();
+
+    ##
+    ## 限制总的使用资金
+    ##
+    ##
+    point = 10000;
+    limit_cash = 30 * point;
+
+    deci = 3;
+    FPrintDeci(margin,deci);
+    FPrintDeci(cashs,deci);
+    FPrintDeci(limit_cash,deci);
+
+    if(margin > limit_cash){
+        ## 限额不接受新订单
+        return -1;
+    }
+
+    return 0;
+```
+
 ## 普通函数
 ---
 

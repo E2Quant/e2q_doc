@@ -26,18 +26,18 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 > 依赖包有以下这些
 
 ```
-apt-get update
-apt install build-essential cmake clang clangd clang-format \
+sudo apt-get update
+sudo apt install build-essential cmake clang clangd clang-format \
             clang-tidy clang-tools  zlib1g-dev zlib1g libzstd1 libzstd-dev bison flex
 ```
 
 > llvm 可能要作以下连接
 
 ``` 
-export llvm_ver=`clang --version  | grep "clang version" | cut -d" " -f4 | cut -d"." -f1`
+sudo export llvm_ver=`clang --version  | grep "clang version" | cut -d" " -f4 | cut -d"." -f1`
 
-ln -s /usr/include/llvm-${llvm_ver}/llvm/ /usr/include/llvm 
-ln -s /usr/include/llvm-c-${llvm_ver}/llvm-c/ /usr/include/llvm-c
+sudo ln -s /usr/include/llvm-${llvm_ver}/llvm/ /usr/include/llvm 
+sudo ln -s /usr/include/llvm-c-${llvm_ver}/llvm-c/ /usr/include/llvm-c
 ```
 
 > 开始安装
@@ -47,7 +47,7 @@ $ cd e2
 $ mkdir build
 $ cd build
 $ cmake  -DUSE_CCACHE=ON -DLIB=ON  ../
-$ make && make install
+$ make && sudo make install
 ```
  
 ### e2q 安装

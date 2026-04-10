@@ -1143,28 +1143,6 @@ E2Q=> select * from quant_risk_profix(1) limit 2;
 
 ---
 
-###  21.资金波动(%)/月
-
-* **quant_risk_profix_month **
-
-> **说明:**
-    资金波动(%)/月.
-    
-    - 参数: verid 
-    
-> 示例:
-```
-E2Q=> select * from quant_risk_profix_month(1) limit 2;
- rid |  rquantid  |  rday   | rcredit | rpcredit_first |    rpcredit_pre
------+------------+---------+---------+----------------+---------------------
-   1 | 1055023176 | 2021-05 | 1000000 |              0 |                   0
-  33 | 1055023160 | 2021-06 | 1002528 |           2528 | 0.25279999999999997
-(2 rows)
-
-```
-
----
-
 ###  22.资金波动(%)/月
 
 * **quant_risk_profix_month **
@@ -1187,7 +1165,29 @@ E2Q=> select * from quant_risk_profix_month(1) limit 2;
 
 ---
 
-###  23.账号每天余额
+###  23.资金波动(%)/月
+
+* **quant_risk_profix_month **
+
+> **说明:**
+    资金波动(%)/月.
+    
+    - 参数: verid 
+    
+> 示例:
+```
+E2Q=> select * from quant_risk_profix_month(1) limit 2;
+ rid |  rquantid  |  rday   | rcredit | rpcredit_first |    rpcredit_pre
+-----+------------+---------+---------+----------------+---------------------
+   1 | 1055023176 | 2021-05 | 1000000 |              0 |                   0
+  33 | 1055023160 | 2021-06 | 1002528 |           2528 | 0.25279999999999997
+(2 rows)
+
+```
+
+---
+
+###  24.账号每天余额
 
 * **risk_balance_for_day **
 
@@ -1210,7 +1210,7 @@ E2Q=> select * from risk_balance_for_day(1,10000000) limit 3;
 
 ---
 
-###  24.账号余额
+###  25.账号余额
 
 * **risk_balance_for_total **
 
@@ -1229,7 +1229,7 @@ E2Q=> select * from risk_balance_for_day(1,10000000) limit 3;
 
 ---
 
-###  25.账号每天信用
+###  26.账号每天信用
 
 * **risk_credit_for_day **
 
@@ -1255,7 +1255,7 @@ E2Q=> select * from risk_credit_for_day(1,10000000) limit 5;
 
 ---
 
-###  26.账号信用
+###  27.账号信用
 
 * **risk_credit_for_total **
 
@@ -1274,7 +1274,7 @@ E2Q=> select * from risk_credit_for_day(1,10000000) limit 5;
 
 ---
 
-###  27.账号每天投入金
+###  28.账号每天投入金
 
 * **risk_credit_for_day **
 
@@ -1299,7 +1299,7 @@ E2Q=> select * from risk_margin_for_day(1,10000000) limit 5;
 
 ---
 
-###  28.账号投入金
+###  29.账号投入金
 
 * **risk_margin_for_total **
 
@@ -1318,7 +1318,7 @@ E2Q=> select * from risk_margin_for_day(1,10000000) limit 5;
 
 ---
 
-###  29.订单收益回报(%)
+###  30.订单收益回报(%)
 
 * **risk_returns_for_day **
 
@@ -1345,7 +1345,7 @@ E2Q=> select * from risk_returns_for_day(1,10000000) limit 5;
 ---
 
 
-###  30.订单收益回报(%)/月
+###  31.订单收益回报(%)/月
 
 * **risk_returns_for_month **
 
