@@ -563,6 +563,27 @@ FVersionId();
   vid = FVersionId();
 ```
 
+
+---
+
+* **LastVerId**
+> 返回最近一个版本 id.
+
+> *函数原型*
+```
+LastVerId();
+```
+> *说明*
+
+- 参数： 无.
+- 返回值: ID 数值.
+
+> 示例:
+
+```
+  last_id = LastVerId();
+```
+
 ---
 
 * **FTradeTime**
