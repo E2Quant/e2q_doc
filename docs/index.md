@@ -15,22 +15,24 @@
 ```shell
 /opt/e2q/build (master) $ ./e2q -h
 ./e2q -e script.e2
-                 Usage:
-                 -h help
-                 -a if oms default fix account number or if ea account index
-                 -b bin history ticket file directory
-                 -d daemon run
-                 -e which loading ea e2l script
-                 -f log directory
-                 -l show llvm ir for e2l
-                 -n read number bin history tickets
-                 -i e2l import codes directory,def:/usr/local/include/e2/
-                 -s which loading oms e2l script
-                 -o only test e2l script
-                 -p which loading db properties
-                 -r e2l run number
-                 -v show e2q version
-
+         Usage:
+         -h help
+         -a if oms default fix account number or if ea account index
+         -b bin history ticket file directory
+         -d daemon run
+         -e which loading ea e2l script
+         -f log directory
+         -l show llvm ll for e2l
+         -w save e2l code to ir path ,def:/usr/local/include/e2l/ea.bc
+         -u use enter name function bitcode file replace e2l script
+         -n read number bin history tickets
+         -i e2l import codes directory,def:/usr/local/include/e2l/
+         -s which loading oms e2l script
+         -o only test e2l script
+         -g only test e2l script build graph dot
+         -p which loading db properties
+         -r e2l run number
+         -v show e2q version
 ```
 > 引导入口的 script 是由 e2l 语言开发
 
