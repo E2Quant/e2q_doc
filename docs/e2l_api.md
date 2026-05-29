@@ -1615,6 +1615,27 @@ FTotalMargin(  );
     return 0;
 ```
 
+---
+
+* **FLimitPriceGap**
+> 返回因限额而产生的差额是多少
+
+> *函数原型*
+```
+FLimitPriceGap(  );
+```
+> *说明*
+
+- 参数： 无.
+- 返回值:  数值.
+
+> 示例:
+
+```
+    price_gap = FLimitPriceGap();
+    
+```
+
 ## 普通函数
 ---
 
