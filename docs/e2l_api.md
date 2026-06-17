@@ -1064,6 +1064,47 @@ FOrderOpenPrice(ticket,bool);
     price = FOrderOpenPrice(ticket, b);
 ```
 
+---
+
+* **FOrderOpenTime**
+> 返回当前订单交易成交价
+
+> *函数原型*
+```
+FOrderOpenTime(ticket,ootype);
+```
+> *说明*
+
+- 参数： ticket 订单号.
+    - ootype 是 e2::UOOTType 结构体
+- 返回值: 返回 时间 数字.
+
+> 结构体 **UOOTType**
+```
+union UOOTType {                                                                                                           
+  oo_day = 3;                                                                                                              
+  oo_hour = 4;                                                                                                             
+  oo_min = 5;                                                                                                              
+  oo_month = 1;                                                                                                            
+  oo_second = 6;                                                                                                           
+  oo_week = 2;                                                                                                             
+  oo_year = 0;                                                                                                             
+  oo_ymd = 7;                                                                                                              
+  oo_ymdh = 8;                                                                                                             
+  oo_ymdhm = 9;                                                                                                            
+  oo_ymdhms = 10;                                                                                                          
+  oo_ymdw = 11;                                                                                                            
+} 
+```
+
+> 示例:
+
+```
+    b = UOOTType.oo_day;
+    day_number = FOrderOpenTime(ticket, b);
+```
+
+
 ## 分析仪
 
 ---
@@ -2626,6 +2667,50 @@ FAdjClose(cfi_id, timeframe, shift);
    
 ```
 
+
+---
+
+* **FOrderPrice**
+> 记录当前一笔记录 order 报价, 可以给当前订单的 SQL 作为查询使用的
+
+> *函数原型*
+```
+FOrderPrice(cfi_id, price);
+```
+> *说明*
+
+- 参数： cfi_id 数值.
+    - price 报价
+- 返回值: 数值.
+
+> 示例:
+
+```
+   adj_price = 100.02;
+   cfi_code = 179595;
+    FOrderPrice(cfi_code, adj_price); 
+```
+
+
+---
+
+* **FVolumeAppend**
+> 在做回测的时候 交易量是不是递增的
+
+> *函数原型*
+```
+FVolumeAppend();
+```
+> *说明*
+
+- 参数：  无.
+- 返回值: 无.
+
+> 示例:
+
+```
+   
+
 ---
 
 * **FOnOpen**
@@ -3251,6 +3336,117 @@ Fmillisecond( now );
 ```
    now = FTimeCurrent( );
    millisecond = Fmillisecond();
+```
+
+
+---
+
+* **FYmd**
+> 转换时间返回: ymd.
+
+> *函数原型*
+```
+FYmd( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   ymd = FYmd(now);
+```
+
+---
+
+* **FYmdh**
+> 转换时间返回: ymdh.
+
+> *函数原型*
+```
+FYmdh( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   ymdh = FYmdh(now);
+```
+
+
+---
+
+* **FYmdhm**
+> 转换时间返回: ymdhm.
+
+> *函数原型*
+```
+FYmdhm( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   ymdhm = FYmdhm(now);
+```
+---
+
+* **FYmdhms**
+> 转换时间返回: ymdhms.
+
+> *函数原型*
+```
+FYmdhms( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   ymdhms = FYmdhms(now);
+```
+
+---
+
+* **FYmdw**
+> 转换时间返回: ymdw.
+
+> *函数原型*
+```
+FYmdw( now );
+```
+> *说明*
+
+- 参数： now 数值.
+- 返回值: 数值.
+
+
+> 示例:
+
+```
+   now = FTimeCurrent( );
+   ymdw = FYmdw(now);
 ```
 
 ## 系统函数
